@@ -1,0 +1,15 @@
+fastapi==0.95.0
+uvicorn[standard]==0.22.0
+pydantic==1.10.11
+scikit-learn==1.2.2
+numpy==1.25.2
+pandas==2.2.2
+sqlalchemy==2.1.0
+alembic==1.11.1
+python-jose==3.3.0
+passlib[bcrypt]==1.7.5
+python-multipart==0.0.6
+pytest==7.4.2
+joblib==1.2.0
+python-Levenshtein==0.21.1
+shap==0.42.1
