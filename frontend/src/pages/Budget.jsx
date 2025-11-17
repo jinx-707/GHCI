@@ -1,192 +1,140 @@
 import React, { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer
+} from "recharts";
 
-const rawBudgets = [
-  { category: "Dining", limit: 5000, spent: 3200, icon: "🍽️" },
-  { category: "Shopping", limit: 8000, spent: 4500, icon: "🛍️" },
-  { category: "Transport", limit: 2500, spent: 1600, icon: "🚗" },
-  { category: "Entertainment", limit: 4000, spent: 1200, icon: "🎬" },
+const forecastData = [
+  { month: "Jan", spent: 12000, forecast: 15000 },
+  { month: "Feb", spent: 11000, forecast: 14000 },
+  { month: "Mar", spent: 13000, forecast: 15500 },
+  { month: "Apr", spent: 9000, forecast: 12000 },
+  { month: "May", spent: 10000, forecast: 13000 },
+  { month: "Jun", spent: 9500, forecast: 12500 }
 ];
-
-const months = ["January", "February", "March", "April", "May", "June"];
 
 const Budget = () => {
   const { theme } = useTheme();
-  const [budgets, setBudgets] = useState(rawBudgets);
-  const [month, setMonth] = useState("June");
+  const [goal, setGoal] = useState(30000);
+  const [spent, setSpent] = useState(18500);
 
-  const updateLimit = (i, newLimit) => {
-    let copy = [...budgets];
-    copy[i].limit = Number(newLimit || 0);
-    setBudgets(copy);
-  };
+  const [sim, setSim] = useState(0); // scenario %
 
-  const card = (light, dark) => ({
-    background: theme === "light" ? light : dark,
-    borderRadius: 24,
+  const predictedTotal = spent - (spent * sim) / 100;
+
+  const card = {
+    background: theme === "light" ? "#ffffff" : "rgba(255,255,255,0.06)",
     padding: 22,
-    color: theme === "light" ? "#1e293b" : "white",
+    borderRadius: 20,
     boxShadow:
       theme === "light"
-        ? "0 8px 28px rgba(16,24,40,0.08)"
-        : "0 8px 28px rgba(0,0,0,0.4)",
-  });
-
-  const sorted = [...budgets].sort((a, b) => b.spent - a.spent);
-  const topCategory = sorted[0];
-
-  const spendingTips = [
-    "Try reducing dining by 10% — easy win 💡",
-    "Shopping is rising — set a weekly limit 🛍️",
-    "Make transport budget fixed (like ₹300/week) 🚗",
-    "Your entertainment is healthier than last month 🎬",
-  ];
-
-  const tip = spendingTips[Math.floor(Math.random() * spendingTips.length)];
+        ? "0 8px 28px rgba(16,24,40,0.05)"
+        : "0 8px 28px rgba(0,0,0,0.45)"
+  };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2 style={{ marginBottom: 16 }}>💼 Budget Planner</h2>
+    <div style={{ display: "grid", gap: 22 }}>
+      <h2>💸 Budget Planner</h2>
 
-      {/* Month Selector */}
-      <select
-        value={month}
-        onChange={(e) => setMonth(e.target.value)}
-        style={{
-          padding: "10px 14px",
-          borderRadius: 12,
-          border: "none",
-          marginBottom: 20,
-          background: theme === "light" ? "#fff" : "rgba(255,255,255,0.06)",
-          color: theme === "light" ? "#1e293b" : "white",
-        }}
-      >
-        {months.map((m) => (
-          <option key={m}>{m}</option>
-        ))}
-      </select>
+      {/* DYNAMIC BUDGET GOAL */}
+      <div style={card}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+            <b>Budget Goal:</b> ₹{goal}
+          </div>
+          <div>
+            <b>Spent:</b> ₹{spent}
+          </div>
+        </div>
 
-      {/* AI TIP CARD */}
-      <div
-        style={card(
-          "linear-gradient(135deg,#fef9c3,#fde68a)",
-          "linear-gradient(135deg,#b45309,#f59e0b)"
-        )}
-      >
-        <div style={{ fontSize: 15, opacity: 0.9 }}>🤖 AI Suggestion</div>
-        <div style={{ marginTop: 8, fontWeight: 700 }}>{tip}</div>
-      </div>
+        <div
+          style={{
+            marginTop: 12,
+            height: 10,
+            background: "rgba(0,0,0,0.1)",
+            borderRadius: 20
+          }}
+        >
+          <div
+            style={{
+              width: `${(spent / goal) * 100}%`,
+              background:
+                spent > goal ? "#ef4444" : "linear-gradient(90deg,#06b6d4,#3b82f6)",
+              height: 10,
+              borderRadius: 20
+            }}
+          ></div>
+        </div>
 
-      {/* Leaderboard */}
-      <div
-        style={{
-          marginTop: 20,
-          ...card(
-            "linear-gradient(135deg,#ffedd5,#fed7aa)",
-            "linear-gradient(135deg,#c2410c,#f97316)"
-          ),
-        }}
-      >
-        <div style={{ fontSize: 14, opacity: 0.85 }}>🔥 Top Spending Category</div>
-        <div style={{ fontSize: 20, fontWeight: 800, marginTop: 6 }}>
-          {topCategory.icon} {topCategory.category}: ₹
-          {topCategory.spent.toLocaleString()}
+        <div style={{ marginTop: 14 }}>
+          <input
+            type="number"
+            placeholder="Set new budget"
+            onChange={(e) => setGoal(Number(e.target.value))}
+            style={{
+              padding: 10,
+              borderRadius: 12,
+              border: "none",
+              background: theme === "light" ? "#f1f5f9" : "rgba(255,255,255,0.06)",
+              color: theme === "light" ? "#1e293b" : "white",
+              width: "50%"
+            }}
+          />
         </div>
       </div>
 
-      {/* BUDGET CARDS */}
-      <div
-        style={{
-          marginTop: 20,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-          gap: 20,
-        }}
-      >
-        {budgets.map((b, i) => {
-          const percent = Math.min(100, Math.round((b.spent / b.limit) * 100));
+      {/* FORECAST GRAPH */}
+      <div style={card}>
+        <h3>📈 Expense Forecast</h3>
 
-          const status =
-            percent >= 100
-              ? { label: "Over Budget", color: "#ef4444", emoji: "🔥" }
-              : percent >= 80
-              ? { label: "Near Limit", color: "#f59e0b", emoji: "⚠️" }
-              : { label: "Healthy", color: "#10b981", emoji: "🟢" };
+        <ResponsiveContainer width="100%" height={260}>
+          <LineChart data={forecastData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="spent" stroke="#6366f1" strokeWidth={3} />
+            <Line
+              type="monotone"
+              dataKey="forecast"
+              stroke="#f97316"
+              strokeWidth={3}
+              strokeDasharray="5 5"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
 
-          const bg = i % 2 === 0
-            ? ["linear-gradient(135deg,#ffedd5,#fed7aa)", "linear-gradient(135deg,#c2410c,#f97316)"]
-            : ["linear-gradient(135deg,#fef9c3,#fde68a)", "linear-gradient(135deg,#b45309,#f59e0b)"];
+      {/* SCENARIO SIMULATOR */}
+      <div style={card}>
+        <h3>🧪 Scenario Simulator</h3>
+        <p>Adjust spending reduction %:</p>
 
-          return (
-            <div key={i} style={card(bg[0], bg[1])}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>
-                  <div style={{ fontSize: 14 }}>{b.icon} {b.category}</div>
-                  <div style={{ marginTop: 4, fontWeight: 700 }}>
-                    ₹{b.spent.toLocaleString()}
-                  </div>
-                </div>
+        <input
+          type="range"
+          min="-50"
+          max="50"
+          value={sim}
+          onChange={(e) => setSim(Number(e.target.value))}
+          style={{ width: "100%" }}
+        />
 
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 12, opacity: 0.85 }}>Limit</div>
-                  <input
-                    type="number"
-                    defaultValue={b.limit}
-                    onChange={(e) => updateLimit(i, e.target.value)}
-                    style={{
-                      marginTop: 6,
-                      padding: "6px 8px",
-                      borderRadius: 8,
-                      border: "none",
-                      width: 90,
-                      background: theme === "light" ? "#fff" : "rgba(255,255,255,0.06)",
-                      color: theme === "light" ? "#1e293b" : "white",
-                    }}
-                  />
-                </div>
-              </div>
+        <p style={{ marginTop: 10 }}>
+          Adjustment: <b>{sim}%</b>
+        </p>
 
-              {/* Badge */}
-              <div
-                style={{
-                  padding: "6px 10px",
-                  borderRadius: 10,
-                  marginTop: 10,
-                  display: "inline-block",
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: "white",
-                  background: status.color,
-                }}
-              >
-                {status.emoji} {status.label}
-              </div>
-
-              {/* Progress */}
-              <div style={{ marginTop: 14 }}>
-                <div
-                  style={{
-                    height: 12,
-                    borderRadius: 12,
-                    background: "rgba(255,255,255,0.3)",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: `${percent}%`,
-                      height: "100%",
-                      background: "linear-gradient(90deg,#f97316,#f59e0b)",
-                    }}
-                  />
-                </div>
-                <div style={{ marginTop: 6, fontSize: 12, opacity: 0.85 }}>
-                  ₹{(b.limit - b.spent).toLocaleString()} left
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        <h4>
+          Predicted Monthly Spend:{" "}
+          <span style={{ color: sim < 0 ? "#ef4444" : "#10b981" }}>
+            ₹{Math.round(predictedTotal)}
+          </span>
+        </h4>
       </div>
     </div>
   );

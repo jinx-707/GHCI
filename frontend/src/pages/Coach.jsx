@@ -1,75 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "../context/ThemeContext";
+
+const NeonBubble = ({ isUser, children, theme }) => {
+  const base = { padding: "12px 16px", borderRadius: 16, maxWidth: "78%", display: "inline-block", fontWeight:500 };
+  if (isUser) {
+    return <div style={{ ...base, background: "linear-gradient(90deg,#7c3aed,#a855f7)", color: "white", boxShadow: "0 10px 40px rgba(124,58,237,0.18)" }}>{children}</div>;
+  }
+  return <div style={{ ...base, background: theme === "light" ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.04)", color: theme === "light" ? "#1e293b" : "white", border: theme === "light" ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.08)" }}>{children}</div>;
+};
 
 const Coach = () => {
   const { theme } = useTheme();
-  const [messages, setMessages] = useState([
-    { sender: "ai", text: "Hello! I'm FinCoach 🤖 — ask me about saving, budgets, or transactions." },
-  ]);
+  const [messages, setMessages] = useState([{ sender: "ai", text: "Hello — I'm FinCoach. Ask me about budgets, savings or spending trends!" }]);
   const [input, setInput] = useState("");
+  const boxRef = useRef(null);
 
-  const chatBoxStyle = {
-    background: theme === "light" ? "white" : "rgba(255,255,255,0.04)",
-    borderRadius: 24,
-    padding: 18,
-    height: "60vh",
-    overflowY: "auto",
-    boxShadow: theme === "light" ? "0 10px 30px rgba(16,24,40,0.04)" : "0 10px 30px rgba(0,0,0,0.45)",
-    color: theme === "light" ? "#1e293b" : "white",
+  useEffect(() => {
+    if (boxRef.current) boxRef.current.scrollTop = boxRef.current.scrollHeight;
+  }, [messages]);
+
+  const generateAIReply = (txt) => {
+    const t = txt.toLowerCase();
+    if (t.includes("save")) return { sender: "ai", text: "Try automating 20% of income — let savings grow silently." };
+    if (t.includes("dining")) return { sender: "ai", text: "Try cooking 2 meals/week — saves ₹800+/mo." };
+    return { sender: "ai", text: "Tell me more — what's your monthly habit?" };
   };
 
-  const inputStyle = {
-    flex: 1,
-    padding: "12px 14px",
-    borderRadius: 14,
-    border: "none",
-    outline: "none",
-    background: theme === "light" ? "#f3f4f6" : "rgba(255,255,255,0.06)",
-    color: theme === "light" ? "#1e293b" : "white",
-  };
-
-  const generateAIReply = (t) => {
-    const txt = t.toLowerCase();
-    if (txt.includes("save")) return { sender: "ai", text: "Try automating 20% to savings and set a small weekly dining cap — works well." };
-    if (txt.includes("dining") || txt.includes("food")) return { sender: "ai", text: "Dining is one of the easiest wins — cook twice a week and track specific restaurants." };
-    if (txt.includes("invest")) return { sender: "ai", text: "Consider a small SIP each month — consistency beats timing." };
-    return { sender: "ai", text: "Nice—tell me a little more about your spending and I’ll suggest a plan." };
-  };
-
-  const sendMessage = () => {
+  const send = () => {
     if (!input.trim()) return;
-    const u = { sender: "user", text: input };
-    const ai = generateAIReply(input);
-    setMessages((s) => [...s, u, ai]);
+    const user = { sender: "user", text: input };
+    setMessages((s) => [...s, user]);
     setInput("");
+    setTimeout(() => setMessages((s) => [...s, generateAIReply(input)]), 550);
   };
 
   return (
-    <div style={{ padding: 20, color: theme === "light" ? "#1e293b" : "white" }}>
-      <h2 style={{ marginBottom: 12 }}>🤖 AI Coach</h2>
+    <div style={{ padding: 20 }}>
+      <h2 style={{ color: theme === "light" ? "#1e293b" : "white", fontWeight:800 }}>🤖 Neon AI Coach</h2>
 
-      <div style={chatBoxStyle}>
+      <div ref={boxRef} style={{
+        height: "62vh",
+        borderRadius: 20,
+        padding: 18,
+        overflowY: "auto",
+        background: theme === "light" ? "linear-gradient(135deg,#fff,#f7f5ff)" : "linear-gradient(135deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01))",
+        boxShadow: theme === "light" ? "0 10px 40px rgba(16,24,40,0.04)" : "0 10px 40px rgba(0,0,0,0.5)",
+        border: theme === "light" ? "1px solid rgba(0,0,0,0.04)" : "1px solid rgba(255,255,255,0.06)"
+      }}>
         {messages.map((m, i) => (
-          <div key={i} style={{ marginBottom: 12, textAlign: m.sender === "user" ? "right" : "left" }}>
-            <div style={{
-              display: "inline-block",
-              padding: "10px 14px",
-              borderRadius: 16,
-              maxWidth: "78%",
-              background: m.sender === "user" ? (theme === "light" ? "#3b82f6" : "#1d4ed8") : (theme === "light" ? "#f3f4f6" : "rgba(255,255,255,0.06)"),
-              color: m.sender === "user" ? "white" : (theme === "light" ? "#1e293b" : "white"),
-            }}>
-              {m.text}
-            </div>
+          <div key={i} style={{ marginBottom: 12, display: "flex", justifyContent: m.sender === "user" ? "flex-end" : "flex-start" }}>
+            <NeonBubble isUser={m.sender === "user"} theme={theme}>{m.text}</NeonBubble>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: 14, display: "flex", gap: 10 }}>
-        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about saving, budgets or trends..." style={inputStyle} />
-        <button onClick={sendMessage} style={{ padding: "12px 16px", borderRadius: 14, border: "none", background: "linear-gradient(135deg,#f97316,#f59e0b)", color: "white", cursor: "pointer", fontWeight: 700 }}>
-          Send
-        </button>
+      <div style={{ marginTop: 12, display: "flex", gap: 10 }}>
+        <input value={input} onChange={(e)=>setInput(e.target.value)} placeholder="Ask FinCoach..." style={{
+          flex:1, padding:"12px 14px", borderRadius:14, border:"none", background: theme === "light" ? "#f3f4f6" : "rgba(255,255,255,0.04)", color: theme === "light" ? "#1e293b" : "white"
+        }} />
+        <button onClick={send} style={{ padding:"12px 16px", borderRadius:14, border:"none", background:"linear-gradient(90deg,#7c3aed,#a855f7)", color:"white", fontWeight:700 }}>Send</button>
       </div>
     </div>
   );
