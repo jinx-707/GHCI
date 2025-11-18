@@ -1,0 +1,28 @@
+{
+  "run_id": "2025-11-18T14:03:07.961548Z",
+  "model_path": "ML/models/model.pkl",
+  "vectorizer_path": "ML/models/vectorizer.pkl",
+  "test_csv": "ML/data/example_small.csv",
+  "metrics": {
+    "accuracy": 0.7142857142857143,
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6666666666666666,
+    "confusion_matrix": [
+      [
+        3,
+        0
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "confidence_mean": 0.5638294978537698,
+    "confidence_std": 0.041693302248928234,
+    "pct_below_0.6": 0.7142857142857143,
+    "consistency": 0.0,
+    "shap_saved": true,
+    "shap_path": "ML/artifacts/shap/summary.png"
+  }
+}

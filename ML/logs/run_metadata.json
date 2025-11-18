@@ -1,0 +1,206 @@
+{
+  "run_id": "2025-11-18T15:46:49.496477Z",
+  "random_state": 12345,
+  "data_path": "ML/data/extended_multi.csv",
+  "saved_paths": {
+    "vectorizer": "ML/models/vectorizer.pkl",
+    "cat_model": "ML/models/cat_model.pkl",
+    "fraud_pipeline": "ML/models/fraud_pipeline.pkl"
+  },
+  "results": {
+    "category": {
+      "val": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "confusion_matrix": [
+          [
+            11,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            23,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            13,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            19
+          ]
+        ],
+        "average": "macro",
+        "confidence_mean": 0.9272236520190132,
+        "confidence_std": 0.010211382344066348,
+        "pct_below_0.6": 0.0
+      },
+      "test": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "confusion_matrix": [
+          [
+            11,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            23,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            13,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            19
+          ]
+        ],
+        "average": "macro",
+        "confidence_mean": 0.9274318904690333,
+        "confidence_std": 0.010461811445958499,
+        "pct_below_0.6": 0.0
+      }
+    },
+    "fraud": {
+      "val": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "confusion_matrix": [
+          [
+            82,
+            0
+          ],
+          [
+            0,
+            23
+          ]
+        ],
+        "average": "binary",
+        "confidence_mean": 0.9677901715144872,
+        "confidence_std": 0.009017471934500957,
+        "pct_below_0.6": 0.0
+      },
+      "test": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "confusion_matrix": [
+          [
+            82,
+            0
+          ],
+          [
+            0,
+            23
+          ]
+        ],
+        "average": "binary",
+        "confidence_mean": 0.9673489649504295,
+        "confidence_std": 0.00840570260378668,
+        "pct_below_0.6": 0.0
+      }
+    }
+  }
+}

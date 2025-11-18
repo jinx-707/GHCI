@@ -1,0 +1,701 @@
+text,category,fraud,amount,text_clean
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Saved to savings account,Transfer,0,200.0,Saved to savingx account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbumks
+Coffee at Starbucks,Dining,0,4.5,Coffie at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Received refund from merchant,Refund,0,45.0,Received refund from merchalt
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Receieed refund from merchant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft chaqge
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from zank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Received refund drom merchant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Dinner at local restaurant,Dining,0,60.0,uinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bafk
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fjaudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transactlon alert
+Unexpected overdraft charge,BankFee,0,25.0,Unevpected overdraft charge
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Chargeback from bank,Fraud,1,120.0,Chargeback frgm bank
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charle
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpectedgoverdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscrbption cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salhry
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Rekeived refund from merchant
+Chargeback from bank,Fraud,1,120.0,Chargebacklfrom bank
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction aqert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Stkrbucks
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner ah local restaurant
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alrrt
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Dinner at local restaurant,Dining,0,60.0,Dinser at local restaurant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Paid rent this month,Rent,0,1200.0,Paidsrent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Received refund from merchant,Refund,0,45.0,Received refund faom merchant
+Coffee at Starbucks,Dining,0,4.5,Coffee at Statbucks
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at lofal restaurant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Coffee at Starbucks,Dining,0,4.5,Coffge at Starbucks
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transactizn alert
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Paid rent this month,Rent,0,1200.0,Paid rtnt this month
+I transferred my salary,Transfer,0,1500.0,I transferredomy salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Savek to savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this moeth
+Unexpected overdraft charge,BankFee,0,25.0,Unexpectei overdraft charge
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Subscription cancelled,Subscription,0,9.99,Subscliption cancelled
+Paid rent this month,Rent,0,1200.0,Paia rent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Saved to savings account,Transfer,0,200.0,Saved to savings akcount
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Received refund from merchant,Refund,0,45.0,Received refund from berchant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Subscription cancelled,Subscription,0,9.99,Subscriptionecancelled
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+I transferred my salary,Transfer,0,1500.0,I transferred ry salary
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscription cvncelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salxry
+I transferred my salary,Transfer,0,1500.0,I transferred mn salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transactioi alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Subscription cancelled,Subscription,0,9.99,Subscription caxcelled
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Fraudulent transaction alert,Fraud,1,300.0,Frauhulent transaction alert
+Saved to savings account,Transfer,0,200.0,Saved to savings accoynt
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbufks
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transartion alert
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent gransaction alert
+Unexpected overdraft charge,BankFee,0,25.0,Unexpectedpoverdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner at local respaurant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Coffee at Starbucks,Dining,0,4.5,Coffee at Stfrbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Dinner at local restaurant,Dining,0,60.0,Dpnner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Chargeback from bank,Fraud,1,120.0,Chargeiack from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this montn
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Saved to savings account,Transfer,0,200.0,Saved to savings xccount
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subsckiption cancelled
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Received refund from merchant,Refund,0,45.0,Redeived refund from merchant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent tronsaction alert
+Received refund from merchant,Refund,0,45.0,Received refund from oerchant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Chargeback from bank,Fraud,1,120.0,Chargeback frim bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restauranz
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Chargefack from bank
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent trpnsaction alert
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucqs
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Chargeback from bank,Fraud,1,120.0,Chargeback from tank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscription cancolled
+Paid rent this month,Rent,0,1200.0,Paid rent thns month
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Fraudulent transaction alert,Fraud,1,300.0,Fraupulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Coffee at Starbucks,Dining,0,4.5,Ckffee at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Dinner at local restaurant,Dining,0,60.0,winner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Received refund from mercpant
+Dinner at local restaurant,Dining,0,60.0,Dinnar at local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rens this month
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Chargebacz from bank
+Fraudulent transaction alert,Fraud,1,300.0,Frauzulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulegt transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rentmthis month
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transactiontalert
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft chargb
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurart
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Saved to savings account,Transfer,0,200.0,Saved to savinvs account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Unexpected overdraft charge,BankFee,0,25.0,Unexpectedsoverdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscriptian cancelled
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft chargk
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft chaege
+Paid rent this month,Rent,0,1200.0,Paid rent this monsh
+Dinner at local restaurant,Dining,0,60.0,Dinner at loctl restaurant
+Saved to savings account,Transfer,0,200.0,Saoed to savings account
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Received refund from merchant,Refund,0,45.0,Received refundqfrom merchant
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Receivad refund from merchant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Subscription cancelled,Subscription,0,9.99,Subscription cancllled
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred myzsalary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Saved to savings account,Transfer,0,200.0,Saved to savings accoult
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscription zancelled
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Subscription cancelled,Subscription,0,9.99,Subrcription cancelled
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent traniaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Subscription cancelled,Subscription,0,9.99,Subscription cancellhd
+Coffee at Starbucks,Dining,0,4.5,Cqffee at Starbucks
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Paid rent this month,Rent,0,1200.0,Paid rent tqis month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft oharge
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+I transferred my salary,Transfer,0,1500.0,I transferred my salcry
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Unexpected overdraft charge,BankFee,0,25.0,Uneapected overdraft charge
+Paid rent this month,Rent,0,1200.0,Paid renm this month
+Chargeback from bank,Fraud,1,120.0,Chargebacs from bank
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Dinner at local restaurant,Dining,0,60.0,Dinqer at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Unexpected overdraft charge,BankFee,0,25.0,Unexpectedboverdraft charge
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Saved to savings account,Transfer,0,200.0,Savedwto savings account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Unexpected overdraft charge,BankFee,0,25.0,ynexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,keceived refund from merchant
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Saved to savings account,Transfer,0,200.0,Saved to savkngs account
+Saved to savings account,Transfer,0,200.0,Savek to savings account
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner ht local restaurant
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred ry salary
+Paid rent this month,Rent,0,1200.0,Paid rent yhis month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,zraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+I transferred my salary,Transfer,0,1500.0,v transferred my salary
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffep at Starbucks
+Dinner at local restaurant,Dining,0,60.0,Dinner xt local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent this monta
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I tracsferred my salary
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restauranb
+Dinner at local restaurant,Dining,0,60.0,Dinnereat local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulentitransaction alert
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,rinner at local restaurant
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner at local respaurant
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local regtaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I transferreddmy salary
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Rebeived refund from merchant
+Dinner at local restaurant,Dining,0,60.0,Dinper at local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Frauqulent transaction alert
+Saved to savings account,Transfer,0,200.0,Saved to yavings account
+Subscription cancelled,Subscription,0,9.99,Subscription caqcelled
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I vransferred my salary
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Saved to savings account,Transfer,0,200.0,Saved te savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+I transferred my salary,Transfer,0,1500.0,I iransferred my salary
+Paid rent this month,Rent,0,1200.0,Paid rent khis month
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Fraudulent transaction alert,Fraud,1,300.0,eraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Coffee at Starbucks,Dining,0,4.5,Coffet at Starbucks
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Coffee at Starbucks,Dining,0,4.5,Coffee af Starbucks
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Paid rent this month,Rent,0,1200.0,Paid rent this jonth
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at locgl restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unqxpected overdraft charge
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Dinner at local restaurant,Dining,0,60.0,Dinner at lkcal restaurant
+Received refund from merchant,Refund,0,45.0,Received refund from mercqant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transadtion alert
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+I transferred my salary,Transfer,0,1500.0,I transferred mybsalary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restauranh
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Receided refund from merchant
+Paid rent this month,Rent,0,1200.0,paid rent this month
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdzaft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner at local reetaurant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Receivez refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription qancelled
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpebted overdraft charge
+Saved to savings account,Transfer,0,200.0,Saved to savimgs account
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charoe
+Saved to savings account,Transfer,0,200.0,Saved to savinas account
+Dinner at local restaurant,Dining,0,60.0,Dinner at locql restaurant
+Chargeback from bank,Fraud,1,120.0,Chargrback from bank
+I transferred my salary,Transfer,0,1500.0,I transflrred my salary
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rentwthis month
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Saved to savings account,Transfer,0,200.0,Saved to savings accgunt
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Subscription cancelled,Subscription,0,9.99,Subscripoion cancelled
+Saved to savings account,Transfer,0,200.0,Saved to savipgs account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction vlert
+Received refund from merchant,Refund,0,45.0,Received eefund from merchant
+Dinner at local restaurant,Dining,0,60.0,Dinner at localcrestaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+I transferred my salary,Transfer,0,1500.0,I transferred my salxry
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Received refund from merchant,Refund,0,45.0,Received refund from megchant
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+I transferred my salary,Transfer,0,1500.0,I transferfed my salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Frajdulent transaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alelt
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Dinner at local restaurant,Dining,0,60.0,Dinneriat local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbwcks
+Paid rent this month,Rent,0,1200.0,Paid renf this month
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Received refund from merchant,Refund,0,45.0,Receiveb refund from merchant
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinnervat local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent thismmonth
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Paid rent this month,Rent,0,1200.0,Paid reng this month
+Subscription cancelled,Subscription,0,9.99,Subgcription cancelled
+Saved to savings account,Transfer,0,200.0,Sazed to savings account
+Paid rent this month,Rent,0,1200.0,Puid rent this month
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Coffee at Starbucks,Dining,0,4.5,Cfffee at Starbucks
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancjlled
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent this mocth
+Fraudulent transaction alert,Fraud,1,300.0,Fraumulent transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charme
+Saved to savings account,Transfer,0,200.0,Saved to savings accound
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restauragt
+Subscription cancelled,Subscription,0,9.99,Subscription cancellew
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Saved to savings account,Transfer,0,200.0,Saveo to savings account
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargnback from bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent trcnsaction alert
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected ovxrdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Dinner at local restaurant,Dining,0,60.0,Dinner ae local restaurant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+I transferred my salary,Transfer,0,1500.0,I twansferred my salary
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+I transferred my salary,Transfer,0,1500.0,I transferred mygsalary
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdrafk charge
+I transferred my salary,Transfer,0,1500.0,c transferred my salary
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+I transferred my salary,Transfer,0,1500.0,v transferred my salary
+Paid rent this month,Rent,0,1200.0,Paid rent this montz
+Dinner at local restaurant,Dining,0,60.0,Dknner at local restaurant
+Saved to savings account,Transfer,0,200.0,Saved to savings accofnt
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Paid rent this month,Rent,0,1200.0,Paid rentythis month
+Saved to savings account,Transfer,0,200.0,Saved to havings account
+Chargeback from bank,Fraud,1,120.0,Chargeback frmm bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbvcks
+Saved to savings account,Transfer,0,200.0,Saved to savhngs account
+Paid rent this month,Rent,0,1200.0,Paid renththis month
+Subscription cancelled,Subscription,0,9.99,Subscriptkon cancelled
+Saved to savings account,Transfer,0,200.0,Savedjto savings account
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbuuks
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+I transferred my salary,Transfer,0,1500.0,I tranrferred my salary
+Received refund from merchant,Refund,0,45.0,Rgceived refund from merchant
+Fraudulent transaction alert,Fraud,1,300.0,Fwaudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee af Starbucks
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+I transferred my salary,Transfer,0,1500.0,I transferred myysalary
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected ovekdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent tqansaction alert
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulenc transaction alert
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Paid rent this month,Rent,0,1200.0,Paih rent this month
+I transferred my salary,Transfer,0,1500.0,I trajsferred my salary
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Chargeback from bank,Fraud,1,120.0,Chargeback frum bank
+Coffee at Starbucks,Dining,0,4.5,Coffee at Startucks
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Received refund from merchant,Refund,0,45.0,Received refund brom merchant
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdrzft charge
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Subscription cancelled,Subscription,0,9.99,Subsciiption cancelled
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee at Stariucks
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Chargeback from bank,Fraud,1,120.0,Chargebmck from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transattion alert
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alprt
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Charpeback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Saved to savings account,Transfer,0,200.0,Savedzto savings account
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Received refund from merchant,Refund,0,45.0,Received refund from merchank
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Received refund from merchant,Refund,0,45.0,Received refund from msrchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferrnd my salary
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdrapt charge
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Chargeback from bank,Fraud,1,120.0,Chargeback from bank
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Coffee at Starbucks,Dining,0,4.5,Cofhee at Starbucks
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Paid rent this month,Rent,0,1200.0,Payd rent this month
+Chargeback from bank,Fraud,1,120.0,Chargeback froz bank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Chargeback from bank,Fraud,1,120.0,Chargeback srom bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restjurant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+I transferred my salary,Transfer,0,1500.0,I traqsferred my salary
+Saved to savings account,Transfer,0,200.0,Saved to savings account
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Dinner at local restaurant,Dining,0,60.0,Dinner at localtrestaurant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Coffee at Starbucks,Dining,0,4.5,Cuffee at Starbucks
+Chargeback from bank,Fraud,1,120.0,Chargzback from bank
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Received refund from merchant,Refund,0,45.0,Reseived refund from merchant
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Receivedsrefund from merchant
+Paid rent this month,Rent,0,1200.0,Paid rent this month
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transactxon alert
+Saved to savings account,Transfer,0,200.0,Saved to savings accouqt
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent trabsaction alert
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Subscription cancelled,Subscription,0,9.99,Subscriptionvcancelled
+Coffee at Starbucks,Dining,0,4.5,Coffee at Starbucks
+Received refund from merchant,Refund,0,45.0,Received refund from merchant
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Fraudulent transaction alert,Fraud,1,300.0,Fraudulent transaction alert
+Coffee at Starbucks,Dining,0,4.5,Coffee at Sbarbucks
+Paid rent this month,Rent,0,1200.0,Paidzrent this month
+I transferred my salary,Transfer,0,1500.0,I transferred my saldry
+Paid rent this month,Rent,0,1200.0,Paid rent this mknth
+Chargeback from bank,Fraud,1,120.0,Chargebacksfrom bank
+Unexpected overdraft charge,BankFee,0,25.0,Unexpected overdraft charge
+Received refund from merchant,Refund,0,45.0,Received refund from mefchant
+Chargeback from bank,Fraud,1,120.0,Chargebaqk from bank
+Dinner at local restaurant,Dining,0,60.0,Dinner at local restaurant
+Subscription cancelled,Subscription,0,9.99,Subscription cancelled
+I transferred my salary,Transfer,0,1500.0,I transferred my salary
+I transferred my salary,Transfer,0,1500.0,I transferred my salarc
+I transferred my salary,Transfer,0,1500.0,I transferred my ealary
+Paid rent this month,Rent,0,1200.0,Paid rent this month

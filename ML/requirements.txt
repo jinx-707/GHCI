@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+imbalanced-learn
+shap
+thefuzz
+python-Levenshtein
+langdetect
+nltk
+matplotlib
+joblib

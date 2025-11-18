@@ -1,0 +1,11 @@
+text,category,fraud,amount
+"I transferred my salary",Transfer,0,1500
+"Unexpected overdraft charge",BankFee,0,25
+"Paid rent this month",Rent,0,1200
+"Subscription cancelled",Subscription,0,9.99
+"Saved to savings account",Transfer,0,200
+"Received refund from merchant",Refund,0,45
+"Fraudulent transaction alert",Fraud,1,300
+"Chargeback from bank",Fraud,1,120
+"Dinner at local restaurant",Dining,0,60
+"Coffee at Starbucks",Dining,0,4.5
