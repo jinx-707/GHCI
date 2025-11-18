@@ -7,50 +7,59 @@ const TopBar = () => {
   return (
     <div
       style={{
-        width: "100%",
         padding: "14px 24px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        background: theme === "light" ? "#ffffffcc" : "rgba(255,255,255,0.03)",
-        backdropFilter: "blur(10px)",
-        color: theme === "light" ? "#0f172a" : "white",
+        background:
+          theme === "light"
+            ? "rgba(255,255,255,0.7)"
+            : "rgba(255,255,255,0.06)",
+        backdropFilter: "blur(12px)",
         borderBottom:
           theme === "light"
-            ? "1px solid rgba(0,0,0,0.06)"
-            : "1px solid rgba(255,255,255,0.06)",
+            ? "1px solid rgba(0,0,0,0.08)"
+            : "1px solid rgba(255,255,255,0.08)",
         position: "sticky",
         top: 0,
-        zIndex: 20,
+        zIndex: 50,
       }}
     >
-      <div style={{ fontSize: 20, fontWeight: 700 }}>FinCoach</div>
+      <div style={{ fontSize: 22, fontWeight: 700, color: "var(--text)" }}>
+        FinCoach
+      </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        {/* SEARCH */}
         <input
-          placeholder="Search transactions, categories..."
+          placeholder="Search..."
           style={{
             padding: "10px 14px",
+            width: 250,
             borderRadius: 12,
             border: "none",
-            width: 300,
-            background: theme === "light" ? "#f1f5f9" : "rgba(255,255,255,0.06)",
+            background:
+              theme === "light"
+                ? "#f1f5f9"
+                : "rgba(255,255,255,0.12)",
             color: theme === "light" ? "#1e293b" : "white",
           }}
         />
 
+        {/* NOTIFICATION ICON */}
         <div
-          title="Notifications"
           style={{
-            width: 36,
-            height: 36,
+            width: 38,
+            height: 38,
             borderRadius: "50%",
-            background: theme === "light" ? "#f1f5f9" : "rgba(255,255,255,0.06)",
+            background:
+              theme === "light"
+                ? "#eef2ff"
+                : "rgba(255,255,255,0.12)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
-            fontSize: 18,
           }}
         >
           🔔

@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
-  const pageBg =
+  const bg =
     theme === "light"
       ? "linear-gradient(135deg, #faf7ff, #fff9f3)"
       : "linear-gradient(135deg, #0f172a, #1e3a8a, #3b82f6)";
@@ -18,27 +18,34 @@ const Layout = ({ children }) => {
       ? "linear-gradient(135deg, #faf7ff, #fff9f3)"
       : "rgba(255,255,255,0.06)";
 
+  // ⭐ UPDATED NAV LIST (NO GAP, SETTINGS INCLUDED)
   const navItems = [
-    { id: "home", label: "Dashboard", icon: "💹", to: "/" },
+    { id: "home", label: "Dashboard", icon: "🏠", to: "/" },
     { id: "budget", label: "Budget", icon: "💸", to: "/budget" },
     { id: "insights", label: "Insights", icon: "📊", to: "/insights" },
     { id: "coach", label: "AI Coach", icon: "🤖", to: "/coach" },
+
+    // NEW PAGE
+    { id: "lifestyle", label: "Lifestyle", icon: "✨", to: "/lifestyle" },
+
+    // SETTINGS BELOW LIFESTYLE
     { id: "settings", label: "Settings", icon: "⚙️", to: "/settings" },
   ];
 
   return (
     <div
       style={{
-        minHeight: "100vh",
-        width: "100%",
+        height: "100vh",
+        width: "100vw",
         display: "flex",
-        background: pageBg,
         overflow: "hidden",
+        background: bg,
       }}
     >
+      {/* SIDEBAR */}
       <aside
         style={{
-          width: 280,
+          width: 300,
           minHeight: "100vh",
           background: sidebarBg,
           borderRight:
@@ -50,11 +57,9 @@ const Layout = ({ children }) => {
           display: "flex",
           flexDirection: "column",
           gap: 20,
-          position: "sticky",
-          top: 0,
-          flexShrink: 0,
         }}
       >
+        {/* LOGO */}
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <div
             style={{
@@ -63,30 +68,28 @@ const Layout = ({ children }) => {
               borderRadius: 12,
               background:
                 theme === "light"
-                  ? "linear-gradient(135deg,#dbeafe,#bfdbfe)"
-                  : "linear-gradient(135deg,#06b6d4,#7c3aed)",
+                  ? "linear-gradient(135deg,#ffedd5,#fed7aa)"
+                  : "linear-gradient(135deg,#c2410c,#f97316)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
             }}
           >
-            {/* growth icon (bars) */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M4 16v4" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-              <path d="M10 10v10" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-              <path d="M16 6v14" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-            </svg>
+            <span style={{ fontSize: 22 }}>💎</span>
           </div>
+
           <div>
             <div style={{ fontWeight: 800, fontSize: 18 }}>FinCoach</div>
             <div style={{ fontSize: 12, opacity: 0.7 }}>Private • Offline</div>
           </div>
         </div>
 
-        <nav style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {/* NAVIGATION */}
+        <nav style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           {navItems.map((n) => {
             const active = location.pathname === n.to;
+
             return (
               <button
                 key={n.id}
@@ -102,21 +105,30 @@ const Layout = ({ children }) => {
                   background: active
                     ? theme === "light"
                       ? "rgba(30,41,59,0.06)"
-                      : "rgba(255,255,255,0.06)"
+                      : "rgba(255,255,255,0.08)"
                     : "transparent",
                   color: theme === "light" ? "#0f172a" : "white",
                   fontWeight: active ? 700 : 600,
+                  transition: "all .15s ease",
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "translateX(6px)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "translateX(0px)")
+                }
               >
-                <div style={{ width: 28, textAlign: "center" }}>{n.icon}</div>
+                <div style={{ width: 30, textAlign: "center" }}>{n.icon}</div>
                 <div style={{ flex: 1 }}>{n.label}</div>
+
                 {active && (
                   <div
                     style={{
                       width: 8,
                       height: 8,
-                      borderRadius: 50,
-                      background: theme === "light" ? "#6d28d9" : "#60a5fa",
+                      borderRadius: 10,
+                      background:
+                        theme === "light" ? "#6d28d9" : "#60a5fa",
                     }}
                   />
                 )}
@@ -125,7 +137,15 @@ const Layout = ({ children }) => {
           })}
         </nav>
 
-        <div style={{ marginTop: "auto", display: "flex", gap: 12 }}>
+        {/* THEME BUTTON */}
+        <div
+          style={{
+            marginTop: "auto",
+            display: "flex",
+            gap: 12,
+            paddingTop: 10,
+          }}
+        >
           <button
             onClick={toggleTheme}
             style={{
@@ -135,40 +155,39 @@ const Layout = ({ children }) => {
               border: "none",
               cursor: "pointer",
               background:
-                theme === "light" ? "#0f172a" : "rgba(255,255,255,0.12)",
+                theme === "light"
+                  ? "#0f172a"
+                  : "rgba(255,255,255,0.12)",
               color: "white",
               fontWeight: 700,
             }}
           >
             {theme === "light" ? "Dark Mode" : "Light Mode"}
           </button>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            style={{
-              padding: 10,
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.06)",
-              background: "transparent",
-              cursor: "pointer",
-            }}
-          >
-            🙋
-          </button>
         </div>
       </aside>
 
+      {/* MAIN */}
       <div
         style={{
           flex: 1,
-          minHeight: "100vh",
+          minHeight: "100%",
           display: "flex",
           flexDirection: "column",
           overflowY: "auto",
-          background: theme === "light" ? "transparent" : "transparent",
         }}
       >
         <TopBar />
-        <main style={{ padding: 28, flex: 1, boxSizing: "border-box" }}>{children}</main>
+        <main
+          style={{
+            padding: 28,
+            flex: 1,
+            boxSizing: "border-box",
+            overflowY: "auto",
+          }}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

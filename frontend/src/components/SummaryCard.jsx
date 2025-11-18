@@ -2,18 +2,23 @@ import React from "react";
 import { useTheme } from "../context/ThemeContext";
 
 const SummaryCard = () => {
-  const { theme } = useTheme();
-  const style = {
-    background: theme === "light" ? "white" : "rgba(255,255,255,0.04)",
-    padding: 22, borderRadius: 16, border: theme === "light" ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.06)"
-  };
-
+  const { accent } = useTheme();
   return (
-    <div style={style}>
-      <h3 style={{ marginTop: 0 }}>Monthly Summary</h3>
-      <p style={{ margin: 0, opacity: 0.8 }}>Income: ₹50,000</p>
-      <p style={{ margin: 0, opacity: 0.8 }}>Expenses: ₹18,500</p>
-      <p style={{ marginTop: 6, fontWeight: 600 }}>Savings: ₹31,500</p>
+    <div style={{ padding: 18, borderRadius: 16, background: "var(--card-bg)", boxShadow: "var(--shadow-soft)" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div>
+          <div style={{ fontWeight: 800 }}>Monthly Summary</div>
+          <div style={{ opacity: 0.7 }}>Income • Expenses • Savings</div>
+        </div>
+        <div style={{ background: `linear-gradient(135deg, ${accent}, ${accent}99)`, padding: 10, borderRadius: 12, color: "white", fontWeight: 800 }}>
+          ₹31,500
+        </div>
+      </div>
+      <div style={{ marginTop: 12, display: "grid", gap: 6 }}>
+        <div style={{ opacity: 0.8 }}>Income: ₹50,000</div>
+        <div style={{ opacity: 0.8 }}>Expenses: ₹18,500</div>
+        <div style={{ fontWeight: 700 }}>Savings So Far: ₹31,500</div>
+      </div>
     </div>
   );
 };

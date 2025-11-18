@@ -1,10 +1,9 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import { ThemeProvider } from "./context/ThemeContext";
-import { ToastProvider } from "./context/ToastContext";
-
 import Layout from "./components/Layout";
+import { ThemeProvider } from "./context/ThemeContext";
+import Lifestyle from "./pages/Lifestyle";
+
+
 import Home from "./pages/Home";
 import Budget from "./pages/Budget";
 import Insights from "./pages/Insights";
@@ -14,19 +13,18 @@ import Settings from "./pages/Settings";
 function App() {
   return (
     <ThemeProvider>
-      <ToastProvider>
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/budget" element={<Budget />} />
-              <Route path="/insights" element={<Insights />} />
-              <Route path="/coach" element={<Coach />} />
-              <Route path="/settings" element={<Settings />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </ToastProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/budget" element={<Budget />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/coach" element={<Coach />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/lifestyle" element={<Lifestyle />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
