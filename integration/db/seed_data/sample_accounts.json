@@ -1,0 +1,20 @@
+[
+  {
+    "user_id": 1,
+    "account_name": "Salary - HDFC Savings",
+    "account_type": "savings",
+    "currency": "INR"
+  },
+  {
+    "user_id": 1,
+    "account_name": "Personal Credit Card",
+    "account_type": "credit_card",
+    "currency": "INR"
+  },
+  {
+    "user_id": 2,
+    "account_name": "Joint Savings",
+    "account_type": "savings",
+    "currency": "INR"
+  }
+]
