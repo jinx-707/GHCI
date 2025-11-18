@@ -8,11 +8,27 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
+  const bg =
+    theme === "light"
+      ? "linear-gradient(135deg, #faf7ff, #fff9f3)"
+      : "linear-gradient(135deg, #0f172a, #1e3a8a, #3b82f6)";
+
+  const sidebarBg =
+    theme === "light"
+      ? "linear-gradient(135deg, #faf7ff, #fff9f3)"
+      : "rgba(255,255,255,0.06)";
+
+  // ⭐ UPDATED NAV LIST (NO GAP, SETTINGS INCLUDED)
   const navItems = [
-    { id: "home", label: "Dashboard", icon: "📊", to: "/" },
+    { id: "home", label: "Dashboard", icon: "🏠", to: "/" },
     { id: "budget", label: "Budget", icon: "💸", to: "/budget" },
-    { id: "insights", label: "Insights", icon: "🔍", to: "/insights" },
+    { id: "insights", label: "Insights", icon: "📊", to: "/insights" },
     { id: "coach", label: "AI Coach", icon: "🤖", to: "/coach" },
+
+    // NEW PAGE
+    { id: "lifestyle", label: "Lifestyle", icon: "✨", to: "/lifestyle" },
+
+    // SETTINGS BELOW LIFESTYLE
     { id: "settings", label: "Settings", icon: "⚙️", to: "/settings" },
   ];
 
@@ -23,46 +39,44 @@ const Layout = ({ children }) => {
         width: "100vw",
         display: "flex",
         overflow: "hidden",
-        background: "var(--bg)",
+        background: bg,
       }}
     >
       {/* SIDEBAR */}
       <aside
         style={{
-          width: 280,
+          width: 300,
           minHeight: "100vh",
-          background: theme === "light"
-            ? "rgba(255,255,255,0.7)"
-            : "rgba(255,255,255,0.08)",
-          backdropFilter: "blur(14px)",
+          background: sidebarBg,
           borderRight:
             theme === "light"
               ? "1px solid rgba(0,0,0,0.06)"
-              : "1px solid rgba(255,255,255,0.08)",
+              : "1px solid rgba(255,255,255,0.12)",
           padding: 24,
+          boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
           gap: 20,
-          position: "sticky",
-          top: 0,
         }}
       >
         {/* LOGO */}
-        <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <div
             style={{
               width: 48,
               height: 48,
-              borderRadius: 14,
-              background: `var(--accent)`,
+              borderRadius: 12,
+              background:
+                theme === "light"
+                  ? "linear-gradient(135deg,#ffedd5,#fed7aa)"
+                  : "linear-gradient(135deg,#c2410c,#f97316)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "white",
-              fontSize: 26,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
             }}
           >
-            ⚡
+            <span style={{ fontSize: 22 }}>💎</span>
           </div>
 
           <div>
@@ -72,7 +86,7 @@ const Layout = ({ children }) => {
         </div>
 
         {/* NAVIGATION */}
-        <nav style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <nav style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           {navItems.map((n) => {
             const active = location.pathname === n.to;
 
@@ -86,27 +100,52 @@ const Layout = ({ children }) => {
                   gap: 12,
                   padding: "12px 14px",
                   borderRadius: 12,
-                  background: active
-                    ? "var(--accent)"
-                    : "transparent",
-                  color: active ? "white" : "var(--text)",
                   border: "none",
-                  fontWeight: active ? 700 : 600,
                   cursor: "pointer",
-                  transition: "0.2s",
+                  background: active
+                    ? theme === "light"
+                      ? "rgba(30,41,59,0.06)"
+                      : "rgba(255,255,255,0.08)"
+                    : "transparent",
+                  color: theme === "light" ? "#0f172a" : "white",
+                  fontWeight: active ? 700 : 600,
+                  transition: "all .15s ease",
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "translateX(6px)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "translateX(0px)")
+                }
               >
-                <span style={{ width: 30, textAlign: "center" }}>
-                  {n.icon}
-                </span>
-                {n.label}
+                <div style={{ width: 30, textAlign: "center" }}>{n.icon}</div>
+                <div style={{ flex: 1 }}>{n.label}</div>
+
+                {active && (
+                  <div
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: 10,
+                      background:
+                        theme === "light" ? "#6d28d9" : "#60a5fa",
+                    }}
+                  />
+                )}
               </button>
             );
           })}
         </nav>
 
-        {/* FOOTER BUTTONS */}
-        <div style={{ marginTop: "auto", display: "flex", gap: 12 }}>
+        {/* THEME BUTTON */}
+        <div
+          style={{
+            marginTop: "auto",
+            display: "flex",
+            gap: 12,
+            paddingTop: 10,
+          }}
+        >
           <button
             onClick={toggleTheme}
             style={{
@@ -114,34 +153,37 @@ const Layout = ({ children }) => {
               padding: 12,
               borderRadius: 12,
               border: "none",
-              background: "var(--accent)",
+              cursor: "pointer",
+              background:
+                theme === "light"
+                  ? "#0f172a"
+                  : "rgba(255,255,255,0.12)",
               color: "white",
               fontWeight: 700,
-              cursor: "pointer",
             }}
           >
-            {theme === "light" ? "Dark" : "Light"} Mode
+            {theme === "light" ? "Dark Mode" : "Light Mode"}
           </button>
         </div>
       </aside>
 
-      {/* MAIN SECTION */}
+      {/* MAIN */}
       <div
         style={{
           flex: 1,
+          minHeight: "100%",
           display: "flex",
           flexDirection: "column",
-          height: "100vh",
-          overflow: "hidden",
+          overflowY: "auto",
         }}
       >
         <TopBar />
-
         <main
           style={{
-            flex: 1,
-            overflowY: "auto",
             padding: 28,
+            flex: 1,
+            boxSizing: "border-box",
+            overflowY: "auto",
           }}
         >
           {children}

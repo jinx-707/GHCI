@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import { ThemeProvider } from "./context/ThemeContext";
+import Lifestyle from "./pages/Lifestyle";
+
 
 import Home from "./pages/Home";
 import Budget from "./pages/Budget";
@@ -19,6 +21,7 @@ function App() {
             <Route path="/insights" element={<Insights />} />
             <Route path="/coach" element={<Coach />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/lifestyle" element={<Lifestyle />} />
           </Routes>
         </Layout>
       </BrowserRouter>
