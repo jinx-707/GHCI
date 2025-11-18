@@ -8,20 +8,10 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
-  const pageBg =
-    theme === "light"
-      ? "linear-gradient(135deg, #faf7ff, #fff9f3)"
-      : "linear-gradient(135deg, #0f172a, #1e3a8a, #3b82f6)";
-
-  const sidebarBg =
-    theme === "light"
-      ? "linear-gradient(135deg, #faf7ff, #fff9f3)"
-      : "rgba(255,255,255,0.06)";
-
   const navItems = [
-    { id: "home", label: "Dashboard", icon: "💹", to: "/" },
+    { id: "home", label: "Dashboard", icon: "📊", to: "/" },
     { id: "budget", label: "Budget", icon: "💸", to: "/budget" },
-    { id: "insights", label: "Insights", icon: "📊", to: "/insights" },
+    { id: "insights", label: "Insights", icon: "🔍", to: "/insights" },
     { id: "coach", label: "AI Coach", icon: "🤖", to: "/coach" },
     { id: "settings", label: "Settings", icon: "⚙️", to: "/settings" },
   ];
@@ -29,64 +19,63 @@ const Layout = ({ children }) => {
   return (
     <div
       style={{
-        minHeight: "100vh",
-        width: "100%",
+        height: "100vh",
+        width: "100vw",
         display: "flex",
-        background: pageBg,
         overflow: "hidden",
+        background: "var(--bg)",
       }}
     >
+      {/* SIDEBAR */}
       <aside
         style={{
           width: 280,
           minHeight: "100vh",
-          background: sidebarBg,
+          background: theme === "light"
+            ? "rgba(255,255,255,0.7)"
+            : "rgba(255,255,255,0.08)",
+          backdropFilter: "blur(14px)",
           borderRight:
             theme === "light"
               ? "1px solid rgba(0,0,0,0.06)"
-              : "1px solid rgba(255,255,255,0.12)",
+              : "1px solid rgba(255,255,255,0.08)",
           padding: 24,
-          boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
           gap: 20,
           position: "sticky",
           top: 0,
-          flexShrink: 0,
         }}
       >
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        {/* LOGO */}
+        <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
           <div
             style={{
               width: 48,
               height: 48,
-              borderRadius: 12,
-              background:
-                theme === "light"
-                  ? "linear-gradient(135deg,#dbeafe,#bfdbfe)"
-                  : "linear-gradient(135deg,#06b6d4,#7c3aed)",
+              borderRadius: 14,
+              background: `var(--accent)`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+              color: "white",
+              fontSize: 26,
             }}
           >
-            {/* growth icon (bars) */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M4 16v4" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-              <path d="M10 10v10" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-              <path d="M16 6v14" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-            </svg>
+            ⚡
           </div>
+
           <div>
             <div style={{ fontWeight: 800, fontSize: 18 }}>FinCoach</div>
             <div style={{ fontSize: 12, opacity: 0.7 }}>Private • Offline</div>
           </div>
         </div>
 
+        {/* NAVIGATION */}
         <nav style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {navItems.map((n) => {
             const active = location.pathname === n.to;
+
             return (
               <button
                 key={n.id}
@@ -97,34 +86,26 @@ const Layout = ({ children }) => {
                   gap: 12,
                   padding: "12px 14px",
                   borderRadius: 12,
-                  border: "none",
-                  cursor: "pointer",
                   background: active
-                    ? theme === "light"
-                      ? "rgba(30,41,59,0.06)"
-                      : "rgba(255,255,255,0.06)"
+                    ? "var(--accent)"
                     : "transparent",
-                  color: theme === "light" ? "#0f172a" : "white",
+                  color: active ? "white" : "var(--text)",
+                  border: "none",
                   fontWeight: active ? 700 : 600,
+                  cursor: "pointer",
+                  transition: "0.2s",
                 }}
               >
-                <div style={{ width: 28, textAlign: "center" }}>{n.icon}</div>
-                <div style={{ flex: 1 }}>{n.label}</div>
-                {active && (
-                  <div
-                    style={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: 50,
-                      background: theme === "light" ? "#6d28d9" : "#60a5fa",
-                    }}
-                  />
-                )}
+                <span style={{ width: 30, textAlign: "center" }}>
+                  {n.icon}
+                </span>
+                {n.label}
               </button>
             );
           })}
         </nav>
 
+        {/* FOOTER BUTTONS */}
         <div style={{ marginTop: "auto", display: "flex", gap: 12 }}>
           <button
             onClick={toggleTheme}
@@ -133,42 +114,38 @@ const Layout = ({ children }) => {
               padding: 12,
               borderRadius: 12,
               border: "none",
-              cursor: "pointer",
-              background:
-                theme === "light" ? "#0f172a" : "rgba(255,255,255,0.12)",
+              background: "var(--accent)",
               color: "white",
               fontWeight: 700,
-            }}
-          >
-            {theme === "light" ? "Dark Mode" : "Light Mode"}
-          </button>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            style={{
-              padding: 10,
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.06)",
-              background: "transparent",
               cursor: "pointer",
             }}
           >
-            🙋
+            {theme === "light" ? "Dark" : "Light"} Mode
           </button>
         </div>
       </aside>
 
+      {/* MAIN SECTION */}
       <div
         style={{
           flex: 1,
-          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          overflowY: "auto",
-          background: theme === "light" ? "transparent" : "transparent",
+          height: "100vh",
+          overflow: "hidden",
         }}
       >
         <TopBar />
-        <main style={{ padding: 28, flex: 1, boxSizing: "border-box" }}>{children}</main>
+
+        <main
+          style={{
+            flex: 1,
+            overflowY: "auto",
+            padding: 28,
+          }}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

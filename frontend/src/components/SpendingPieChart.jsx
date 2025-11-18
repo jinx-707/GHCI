@@ -2,41 +2,27 @@ import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { useTheme } from "../context/ThemeContext";
 
-const COLORS_LIGHT = ["#f97316", "#f59e0b", "#60a5fa", "#a78bfa"];
-const COLORS_DARK = ["#fb923c", "#f59e0b", "#60a5fa", "#a78bfa"];
+const data = [
+  { name: 'Dining', value: 400 },
+  { name: 'Shopping', value: 300 },
+  { name: 'Utilities', value: 200 },
+  { name: 'Fuel', value: 100 }
+];
+
+const COLORS_LIGHT = ['#f97316', '#7c3aed', '#3b82f6', '#10b981'];
 
 const SpendingPieChart = () => {
-  const { theme } = useTheme();
-  const data = [
-    { name: "Dining", value: 250 },
-    { name: "Shopping", value: 400 },
-    { name: "Transport", value: 150 },
-    { name: "Groceries", value: 350 },
-  ];
-
-  const colors = theme === "light" ? COLORS_LIGHT : COLORS_DARK;
-
+  const { theme, accent } = useTheme();
+  const colors = COLORS_LIGHT;
   return (
-    <div style={{
-      background: theme === "light" ? "white" : "rgba(255,255,255,0.04)",
-      padding: 18, borderRadius: 16, border: theme === "light" ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.06)"
-    }}>
-      <h4 style={{ marginTop: 0 }}>Spending Breakdown</h4>
-      <div style={{ width: "100%", height: 220 }}>
-        <ResponsiveContainer>
+    <div style={{ padding: 16, borderRadius: 16, background: "var(--card-bg)", height: 260 }}>
+      <div style={{ fontWeight: 800 }}>Spending Breakdown</div>
+      <div style={{ height: 180, marginTop: 8 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <PieChart>
-            <Pie
-              data={data}
-              dataKey="value"
-              nameKey="name"
-              innerRadius={50}
-              outerRadius={80}
-              paddingAngle={4}
-              labelLine={false}
-              label={({ name, percent }) => `${name} ${(percent*100).toFixed(0)}%`}
-            >
+            <Pie data={data} dataKey="value" innerRadius={40} outerRadius={70} paddingAngle={6}>
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                <Cell key={`cell-${index}`} fill={index === 1 ? accent : colors[index % colors.length]} />
               ))}
             </Pie>
             <Tooltip />
