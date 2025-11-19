@@ -1,140 +1,396 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
+import { formatRupees } from "../utils/currency";
+import ScenarioSimulator from "../components/ScenarioSimulator";
 import {
-  LineChart,
-  Line,
-  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
-const forecastData = [
-  { month: "Jan", spent: 12000, forecast: 15000 },
-  { month: "Feb", spent: 11000, forecast: 14000 },
-  { month: "Mar", spent: 13000, forecast: 15500 },
-  { month: "Apr", spent: 9000, forecast: 12000 },
-  { month: "May", spent: 10000, forecast: 13000 },
-  { month: "Jun", spent: 9500, forecast: 12500 }
+const categoryData = [
+  { name: "🍽️ Dining", value: 45000, budget: 40000, color: "#FF6B6B" },
+  { name: "🛍️ Shopping", value: 32000, budget: 30000, color: "#4ECDC4" },
+  { name: "🚗 Transport", value: 18000, budget: 20000, color: "#45B7D1" },
+  { name: "💡 Utilities", value: 15000, budget: 25000, color: "#96CEB4" },
+  { name: "🛒 Groceries", value: 28000, budget: 35000, color: "#FFEAA7" },
+  { name: "🎬 Entertainment", value: 12000, budget: 15000, color: "#DDA0DD" },
+];
+
+const weeklySpending = [
+  { week: "Week 1", amount: 28000 },
+  { week: "Week 2", amount: 35000 },
+  { week: "Week 3", amount: 42000 },
+  { week: "Week 4", amount: 45000 },
 ];
 
 const Budget = () => {
-  const { theme } = useTheme();
-  const [goal, setGoal] = useState(30000);
-  const [spent, setSpent] = useState(18500);
+  const { getThemeColors } = useTheme();
+  const colors = getThemeColors();
+  const [monthlyBudget, setMonthlyBudget] = useState(250000);
+  const [currentSpent] = useState(150000);
+  const [savingsGoal] = useState(50000);
+  
+  const totalCategorySpent = categoryData.reduce((sum, cat) => sum + cat.value, 0);
+  const remaining = monthlyBudget - totalCategorySpent;
+  const progressPercent = (totalCategorySpent / monthlyBudget) * 100;
+  const savingsProgress = (remaining / savingsGoal) * 100;
 
-  const [sim, setSim] = useState(0); // scenario %
-
-  const predictedTotal = spent - (spent * sim) / 100;
-
-  const card = {
-    background: theme === "light" ? "#ffffff" : "rgba(255,255,255,0.06)",
-    padding: 22,
-    borderRadius: 20,
-    boxShadow:
-      theme === "light"
-        ? "0 8px 28px rgba(16,24,40,0.05)"
-        : "0 8px 28px rgba(0,0,0,0.45)"
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Simulate real-time updates
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div style={{ display: "grid", gap: 22 }}>
-      <h2>💸 Budget Planner</h2>
-
-      {/* DYNAMIC BUDGET GOAL */}
-      <div style={card}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <b>Budget Goal:</b> ₹{goal}
+    <div className="fadeIn" style={{ display: "grid", gap: 20 }}>
+      {/* Top Stats Row */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: 16,
+      }}>
+        <div className="card" style={{
+          background: `linear-gradient(135deg, ${colors.accent}20, ${colors.accent}10)`,
+          border: `1px solid ${colors.accent}30`,
+          textAlign: "center",
+          padding: 16,
+        }}>
+          <div style={{ fontSize: 24, fontWeight: 800, color: colors.accent }}>
+            {formatRupees(monthlyBudget)}
           </div>
-          <div>
-            <b>Spent:</b> ₹{spent}
+          <div style={{ fontSize: 12, color: colors.textSecondary, marginTop: 4 }}>
+            💰 Monthly Budget
           </div>
         </div>
+        
+        <div className="card" style={{
+          background: `linear-gradient(135deg, ${colors.error}20, ${colors.error}10)`,
+          border: `1px solid ${colors.error}30`,
+          textAlign: "center",
+          padding: 16,
+        }}>
+          <div style={{ fontSize: 24, fontWeight: 800, color: colors.error }}>
+            {formatRupees(totalCategorySpent)}
+          </div>
+          <div style={{ fontSize: 12, color: colors.textSecondary, marginTop: 4 }}>
+            💸 Total Spent
+          </div>
+        </div>
+        
+        <div className="card" style={{
+          background: `linear-gradient(135deg, ${colors.success}20, ${colors.success}10)`,
+          border: `1px solid ${colors.success}30`,
+          textAlign: "center",
+          padding: 16,
+        }}>
+          <div style={{ fontSize: 24, fontWeight: 800, color: remaining >= 0 ? colors.success : colors.error }}>
+            {formatRupees(Math.abs(remaining))}
+          </div>
+          <div style={{ fontSize: 12, color: colors.textSecondary, marginTop: 4 }}>
+            {remaining >= 0 ? "💚 Remaining" : "⚠️ Over Budget"}
+          </div>
+        </div>
+        
+        <div className="card" style={{
+          background: `linear-gradient(135deg, ${colors.warning}20, ${colors.warning}10)`,
+          border: `1px solid ${colors.warning}30`,
+          textAlign: "center",
+          padding: 16,
+        }}>
+          <div style={{ fontSize: 24, fontWeight: 800, color: colors.warning }}>
+            {Math.round(savingsProgress)}%
+          </div>
+          <div style={{ fontSize: 12, color: colors.textSecondary, marginTop: 4 }}>
+            🎯 Savings Goal
+          </div>
+        </div>
+      </div>
 
-        <div
-          style={{
-            marginTop: 12,
-            height: 10,
-            background: "rgba(0,0,0,0.1)",
-            borderRadius: 20
-          }}
-        >
-          <div
-            style={{
-              width: `${(spent / goal) * 100}%`,
-              background:
-                spent > goal ? "#ef4444" : "linear-gradient(90deg,#06b6d4,#3b82f6)",
+      {/* Main Content Row */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 20,
+      }}>
+        {/* Budget Control Panel */}
+        <div className="card" style={{
+          background: colors.cardBg,
+          border: `1px solid ${colors.border}`,
+        }}>
+          <h3 style={{
+            margin: "0 0 16px 0",
+            fontSize: 18,
+            fontWeight: 700,
+            color: colors.text,
+          }}>
+            🎛️ Budget Control
+          </h3>
+          
+          <div style={{ marginBottom: 20 }}>
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: 8,
+            }}>
+              <span style={{ color: colors.text, fontSize: 14 }}>Monthly Progress</span>
+              <span style={{ color: colors.accent, fontSize: 14, fontWeight: 600 }}>
+                {Math.round(progressPercent)}%
+              </span>
+            </div>
+            <div style={{
               height: 10,
-              borderRadius: 20
-            }}
-          ></div>
-        </div>
-
-        <div style={{ marginTop: 14 }}>
-          <input
-            type="number"
-            placeholder="Set new budget"
-            onChange={(e) => setGoal(Number(e.target.value))}
-            style={{
-              padding: 10,
-              borderRadius: 12,
-              border: "none",
-              background: theme === "light" ? "#f1f5f9" : "rgba(255,255,255,0.06)",
-              color: theme === "light" ? "#1e293b" : "white",
-              width: "50%"
-            }}
-          />
-        </div>
-      </div>
-
-      {/* FORECAST GRAPH */}
-      <div style={card}>
-        <h3>📈 Expense Forecast</h3>
-
-        <ResponsiveContainer width="100%" height={260}>
-          <LineChart data={forecastData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="spent" stroke="#6366f1" strokeWidth={3} />
-            <Line
-              type="monotone"
-              dataKey="forecast"
-              stroke="#f97316"
-              strokeWidth={3}
-              strokeDasharray="5 5"
+              background: colors.border,
+              borderRadius: 5,
+              overflow: "hidden",
+            }}>
+              <div style={{
+                width: `${Math.min(progressPercent, 100)}%`,
+                height: "100%",
+                background: progressPercent > 90 
+                  ? `linear-gradient(90deg, ${colors.error}, #dc2626)`
+                  : `linear-gradient(90deg, ${colors.accent}, ${colors.accentHover})`,
+                transition: "width 0.5s ease",
+              }} />
+            </div>
+          </div>
+          
+          <div style={{
+            display: "flex",
+            gap: 12,
+            marginBottom: 20,
+          }}>
+            <input
+              type="number"
+              placeholder="Set monthly budget"
+              value={monthlyBudget}
+              onChange={(e) => setMonthlyBudget(Number(e.target.value))}
+              style={{
+                flex: 1,
+                padding: 12,
+                borderRadius: 8,
+                border: `1px solid ${colors.border}`,
+                background: colors.glass,
+                color: colors.text,
+                fontSize: 14,
+              }}
             />
-          </LineChart>
-        </ResponsiveContainer>
+            <button className="btn btn-primary" style={{
+              background: colors.accent,
+              color: "white",
+              padding: "12px 16px",
+              fontSize: 14,
+            }}>
+              Update
+            </button>
+          </div>
+          
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 12,
+          }}>
+            <button style={{
+              padding: 12,
+              borderRadius: 8,
+              border: `1px solid ${colors.success}`,
+              background: colors.success + "20",
+              color: colors.success,
+              fontSize: 14,
+              fontWeight: 600,
+            }}>
+              💾 Save Budget
+            </button>
+            <button style={{
+              padding: 12,
+              borderRadius: 8,
+              border: `1px solid ${colors.warning}`,
+              background: colors.warning + "20",
+              color: colors.warning,
+              fontSize: 14,
+              fontWeight: 600,
+            }}>
+              📊 Export Data
+            </button>
+          </div>
+        </div>
+
+        {/* Enhanced Scenario Simulator */}
+        <ScenarioSimulator currentSpending={currentSpent} />
       </div>
 
-      {/* SCENARIO SIMULATOR */}
-      <div style={card}>
-        <h3>🧪 Scenario Simulator</h3>
-        <p>Adjust spending reduction %:</p>
+      {/* Charts Row */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 20,
+      }}>
+        {/* Category Spending Pie Chart */}
+        <div className="card" style={{
+          background: colors.cardBg,
+          border: `1px solid ${colors.border}`,
+        }}>
+          <h3 style={{
+            margin: "0 0 16px 0",
+            fontSize: 18,
+            fontWeight: 700,
+            color: colors.text,
+          }}>
+            🥧 Spending Breakdown
+          </h3>
+          
+          <div style={{ height: 250 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={categoryData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={100}
+                  dataKey="value"
+                >
+                  {categoryData.map((entry, index) => (
+                    <Cell key={index} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  formatter={(value) => formatRupees(value)}
+                  contentStyle={{
+                    background: colors.cardBg,
+                    border: `1px solid ${colors.border}`,
+                    borderRadius: 8,
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        
+        {/* Weekly Spending Trend */}
+        <div className="card" style={{
+          background: colors.cardBg,
+          border: `1px solid ${colors.border}`,
+        }}>
+          <h3 style={{
+            margin: "0 0 16px 0",
+            fontSize: 18,
+            fontWeight: 700,
+            color: colors.text,
+          }}>
+            📈 Weekly Trend
+          </h3>
+          
+          <div style={{ height: 250 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={weeklySpending}>
+                <XAxis dataKey="week" stroke={colors.textSecondary} />
+                <YAxis 
+                  stroke={colors.textSecondary}
+                  tickFormatter={(value) => formatRupees(value)}
+                />
+                <Tooltip
+                  formatter={(value) => formatRupees(value)}
+                  contentStyle={{
+                    background: colors.cardBg,
+                    border: `1px solid ${colors.border}`,
+                    borderRadius: 8,
+                  }}
+                />
+                <Bar dataKey="amount" fill={colors.accent} radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
 
-        <input
-          type="range"
-          min="-50"
-          max="50"
-          value={sim}
-          onChange={(e) => setSim(Number(e.target.value))}
-          style={{ width: "100%" }}
-        />
-
-        <p style={{ marginTop: 10 }}>
-          Adjustment: <b>{sim}%</b>
-        </p>
-
-        <h4>
-          Predicted Monthly Spend:{" "}
-          <span style={{ color: sim < 0 ? "#ef4444" : "#10b981" }}>
-            ₹{Math.round(predictedTotal)}
-          </span>
-        </h4>
+      {/* Category Details */}
+      <div className="card" style={{
+        background: colors.cardBg,
+        border: `1px solid ${colors.border}`,
+      }}>
+        <h3 style={{
+          margin: "0 0 16px 0",
+          fontSize: 18,
+          fontWeight: 700,
+          color: colors.text,
+        }}>
+          📋 Category Performance
+        </h3>
+        
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: 16,
+        }}>
+          {categoryData.map((item, index) => {
+            const percent = (item.value / item.budget) * 100;
+            const isOverBudget = item.value > item.budget;
+            
+            return (
+              <div key={index} style={{
+                padding: 16,
+                background: colors.glass,
+                borderRadius: 12,
+                border: `1px solid ${colors.border}`,
+              }}>
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 12,
+                }}>
+                  <div style={{
+                    fontWeight: 600,
+                    color: colors.text,
+                    fontSize: 14,
+                  }}>
+                    {item.name}
+                  </div>
+                  <div style={{
+                    fontSize: 12,
+                    color: isOverBudget ? colors.error : colors.success,
+                    fontWeight: 600,
+                  }}>
+                    {formatRupees(item.value)} / {formatRupees(item.budget)}
+                  </div>
+                </div>
+                
+                <div style={{
+                  height: 6,
+                  background: colors.border,
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  marginBottom: 8,
+                }}>
+                  <div style={{
+                    width: `${Math.min(percent, 100)}%`,
+                    height: "100%",
+                    background: isOverBudget ? colors.error : item.color,
+                    transition: "width 0.3s ease",
+                  }} />
+                </div>
+                
+                <div style={{
+                  fontSize: 11,
+                  color: colors.textSecondary,
+                }}>
+                  {isOverBudget 
+                    ? `${formatRupees(item.value - item.budget)} over budget (${Math.round(percent)}%)`
+                    : `${formatRupees(item.budget - item.value)} remaining (${Math.round(percent)}%)`
+                  }
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

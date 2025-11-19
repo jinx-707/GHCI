@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  ghci-app:
+    build: .
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=sqlite:///./ghci.db
+      - DEBUG=false
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  ghci-db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=ghci
+      - POSTGRES_USER=ghci
+      - POSTGRES_PASSWORD=ghci123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

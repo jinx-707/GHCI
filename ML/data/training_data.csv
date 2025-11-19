@@ -1,0 +1,96 @@
+text,category,fraud,amount
+"Starbucks Coffee purchase",Dining,0,450
+"Amazon online shopping",Shopping,0,7500
+"Shell petrol pump",Transportation,0,3800
+"Big Bazaar grocery",Groceries,0,10500
+"Netflix subscription",Entertainment,0,1300
+"Electricity bill BESCOM",Utilities,0,7500
+"House rent payment",Housing,0,100000
+"McDonald's order",Dining,0,1050
+"Flipkart shopping",Shopping,0,5600
+"HP Petrol pump",Transportation,0,4300
+"More Megastore grocery",Groceries,0,8200
+"Hotstar premium",Entertainment,0,800
+"Water bill BWSSB",Utilities,0,3800
+"EMI payment HDFC",Housing,0,155000
+"Dominos pizza delivery",Dining,0,2400
+"Croma electronics",Shopping,0,25000
+"Ola cab ride",Transportation,0,1500
+"Spencer's retail",Groceries,0,7300
+"Amazon Prime Video",Entertainment,0,1200
+"Gas cylinder Indane",Utilities,0,5700
+"Cafe Coffee Day",Dining,0,520
+"Myntra fashion",Shopping,0,3800
+"Uber ride",Transportation,0,1850
+"Reliance Fresh",Groceries,0,6400
+"Zee5 subscription",Entertainment,0,1100
+"Airtel broadband",Utilities,0,6700
+"Biryani Blues order",Dining,0,980
+"Nykaa cosmetics",Shopping,0,10800
+"Metro card recharge",Transportation,0,230
+"DMart supermarket",Groceries,0,13100
+"Apollo Pharmacy",Health,0,4200
+"Fortis Hospital",Health,0,12500
+"MedPlus medicines",Health,0,2100
+"Dental clinic",Health,0,10000
+"Max Hospital emergency",Health,0,71000
+"LIC premium payment",Insurance,0,20500
+"Car insurance ICICI",Insurance,0,10400
+"Term insurance HDFC",Insurance,0,7500
+"Home insurance Bajaj",Insurance,0,100000
+"ATM cash withdrawal",Cash,0,8300
+"NEFT bank transfer",Transfer,0,208000
+"Salary credit TCS",Income,0,292000
+"FD interest SBI",Income,0,10500
+"Tax refund IT dept",Income,0,154000
+"Freelance payment",Income,0,62500
+"Unknown merchant UPI",Other,1,25000
+"Suspicious online txn",Other,1,13100
+"Unauthorized debit card",Other,1,7500
+"Fake ATM withdrawal",Cash,1,16700
+"Bogus subscription",Entertainment,1,2500
+"Phishing website buy",Shopping,1,5700
+"Identity theft charge",Other,1,37500
+"Stolen card usage",Dining,1,6500
+"Scam payment link",Other,1,10400
+"Fake charity UPI",Other,1,4200
+"Barbeque Nation",Dining,0,2900
+"Reliance Digital",Shopping,0,7300
+"Indian Oil petrol",Transportation,0,4100
+"Food Bazaar",Groceries,0,7700
+"SonyLIV premium",Entertainment,0,700
+"BSNL landline bill",Utilities,0,7100
+"PG accommodation",Housing,0,121000
+"KFC chicken bucket",Dining,0,770
+"Lifestyle stores",Shopping,0,13100
+"BMTC bus pass",Transportation,0,4200
+"Fresh To Home",Groceries,0,5700
+"Disney+ Hotstar",Entertainment,0,950
+"Waste management",Utilities,0,2100
+"Education loan SBI",Education,0,29200
+"Pearson textbooks",Education,0,10500
+"University fees",Education,0,208000
+"Stationery shop",Education,0,3800
+"Coursera subscription",Education,0,16700
+"Library fine",Education,0,420
+"Haldirams sweets",Dining,0,1120
+"Westside clothing",Shopping,0,19600
+"Railway ticket IRCTC",Transportation,0,2900
+"Organic farmers market",Groceries,0,2400
+"Voot premium",Entertainment,0,500
+"Tata Sky DTH",Utilities,0,10400
+"OYO hotel booking",Travel,0,15800
+"IndiGo flight ticket",Travel,0,38100
+"Zoomcar rental",Travel,0,7500
+"Travel insurance",Travel,0,3800
+"Taj restaurant",Dining,0,10500
+"Tanishq jewellery",Shopping,0,47400
+"Auto rickshaw",Transportation,0,1300
+"Organic India store",Groceries,0,6600
+"BookMyShow tickets",Entertainment,0,7500
+"Sewage treatment",Utilities,0,2900
+"Suspicious foreign UPI",Other,1,19600
+"Unknown Paytm merchant",Shopping,1,6600
+"Fake tech support",Other,1,16700
+"Bogus app subscription",Entertainment,1,1700
+"Counterfeit product",Shopping,1,7500

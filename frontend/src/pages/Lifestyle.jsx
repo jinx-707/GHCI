@@ -1,232 +1,463 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
-
-const cardStyle = (theme) => ({
-  background: theme === "light" ? "white" : "rgba(255,255,255,0.06)",
-  padding: 22,
-  borderRadius: 20,
-  boxShadow:
-    theme === "light"
-      ? "0 6px 20px rgba(0,0,0,0.06)"
-      : "0 6px 20px rgba(0,0,0,0.4)",
-  border:
-    theme === "light"
-      ? "1px solid rgba(0,0,0,0.06)"
-      : "1px solid rgba(255,255,255,0.1)",
-  color: theme === "light" ? "#0f172a" : "white",
-});
+import { formatRupees } from "../utils/currency";
+import apiService from "../services/api";
 
 const Lifestyle = () => {
-  const { theme } = useTheme();
+  const { getThemeColors } = useTheme();
+  const colors = getThemeColors();
+  const [activeTab, setActiveTab] = useState('spending');
+  const [lifestyleData, setLifestyleData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Currency Converter
-  const [amount, setAmount] = useState(1000);
-  const conversionRate = 0.011; // INR -> USD demo
-  const converted = (amount * conversionRate).toFixed(2);
+  useEffect(() => {
+    const fetchLifestyleData = async () => {
+      try {
+        const testData = await apiService.getTestData();
+        if (testData.test_results) {
+          const transactions = testData.test_results.map(item => ({
+            text: item.input?.text || '',
+            amount: item.input?.amount || 0,
+            category: item.prediction?.category || 'Other',
+            fraud_risk: item.prediction?.fraud_risk_level || 'LOW'
+          }));
+          
+          const insights = await apiService.getInsights(transactions);
+          setLifestyleData({
+            transactions,
+            insights: insights.insights,
+            totalSpending: insights.insights?.total_amount || 0
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load lifestyle data:', error);
+        setLifestyleData({
+          transactions: [],
+          insights: { category_breakdown: {} },
+          totalSpending: 0
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLifestyleData();
+    const interval = setInterval(fetchLifestyleData, 30000); // Refresh every 30s
+    return () => clearInterval(interval);
+  }, []);
+
+  const getLifestyleProfile = () => {
+    if (!lifestyleData?.insights?.category_breakdown) return 'Balanced';
+    
+    const categories = lifestyleData.insights.category_breakdown;
+    const total = Object.values(categories).reduce((sum, val) => sum + val, 0);
+    
+    if (categories.Dining > total * 0.4) return 'Foodie';
+    if (categories.Shopping > total * 0.4) return 'Shopaholic';
+    if (categories.Entertainment > total * 0.3) return 'Entertainment Lover';
+    if (categories.Transportation > total * 0.3) return 'Traveler';
+    return 'Balanced Spender';
+  };
+
+  const getSpendingPersonality = () => {
+    const total = lifestyleData?.totalSpending || 0;
+    if (total > 200000) return { type: 'High Spender', color: colors.error, icon: '💸' };
+    if (total > 100000) return { type: 'Moderate Spender', color: colors.warning, icon: '💰' };
+    return { type: 'Conservative Spender', color: colors.success, icon: '🏦' };
+  };
+
+  const lifestyleTips = {
+    'Foodie': [
+      'Try cooking at home 2-3 times a week to save ₹8K monthly',
+      'Use food delivery apps with discounts and offers',
+      'Explore local street food for budget-friendly options'
+    ],
+    'Shopaholic': [
+      'Set a monthly shopping budget and stick to it',
+      'Wait 24 hours before making non-essential purchases',
+      'Use cashback apps and compare prices online'
+    ],
+    'Entertainment Lover': [
+      'Look for group discounts on movie tickets and events',
+      'Consider annual subscriptions instead of monthly ones',
+      'Explore free entertainment options in your city'
+    ],
+    'Balanced Spender': [
+      'You have good spending habits! Keep it up',
+      'Consider increasing your savings rate by 5%',
+      'Look for investment opportunities with your surplus'
+    ]
+  };
+
+  if (loading) {
+    return (
+      <div className="fadeIn" style={{ display: "grid", gap: 24 }}>
+        <div className="card" style={{
+          background: colors.cardBg,
+          border: `1px solid ${colors.border}`,
+          textAlign: 'center',
+          padding: 40,
+        }}>
+          <div style={{ color: colors.textSecondary }}>🔄 Analyzing your lifestyle...</div>
+        </div>
+      </div>
+    );
+  }
+
+  const profile = getLifestyleProfile();
+  const personality = getSpendingPersonality();
+  const tips = lifestyleTips[profile] || lifestyleTips['Balanced Spender'];
 
   return (
-    <div style={{ display: "grid", gap: 24 }}>
-
-      {/* Smart Shopping Title */}
-      <h2 style={{ marginBottom: 10 }}>🛍️ Smart Lifestyle Assistant</h2>
-
-      {/* Smart Shopping Advisor */}
-      <div style={cardStyle(theme)}>
-        <h3 style={{ marginBottom: 12 }}>🛒 Smart Shopping Advisor</h3>
-        <p style={{ opacity: 0.7 }}>
-          Compare prices across platforms instantly.
-        </p>
-
-        <div style={{ marginTop: 14, display: "grid", gap: 18 }}>
-          {[
-            {
-              product: "iPhone 15",
-              prices: [
-                ["Amazon", 799],
-                ["Flipkart", 829],
-                ["Best Buy", 799],
-              ],
-              cashback: "5% Cashback",
-            },
-            {
-              product: "Samsung TV 55\"",
-              prices: [
-                ["Amazon", 599],
-                ["Flipkart", 649],
-                ["Best Buy", 579],
-              ],
-              cashback: "3% Cashback",
-            },
-            {
-              product: "Laptop Dell XPS",
-              prices: [
-                ["Amazon", 1299],
-                ["Flipkart", 1350],
-                ["Best Buy", 1249],
-              ],
-              cashback: "2% Cashback",
-            },
-          ].map((item, i) => {
-            const best = Math.min(...item.prices.map((p) => p[1]));
-            return (
-              <div
-                key={i}
-                style={{
-                  padding: 16,
-                  borderRadius: 16,
-                  background:
-                    theme === "light"
-                      ? "#fafafa"
-                      : "rgba(255,255,255,0.04)",
-                  border:
-                    theme === "light"
-                      ? "1px solid rgba(0,0,0,0.06)"
-                      : "1px solid rgba(255,255,255,0.1)",
-                }}
-              >
-                <div style={{ fontSize: 18, fontWeight: 700 }}>
-                  {item.product}
-                </div>
-
-                <div
-                  style={{
-                    marginTop: 10,
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr",
-                    gap: 10,
-                  }}
-                >
-                  {item.prices.map(([store, price]) => (
-                    <div
-                      key={store}
-                      style={{
-                        padding: 10,
-                        borderRadius: 10,
-                        background:
-                          price === best
-                            ? "var(--accent)"
-                            : theme === "light"
-                              ? "white"
-                              : "rgba(255,255,255,0.06)",
-                        color:
-                          price === best
-                            ? "white"
-                            : theme === "light"
-                              ? "#1e293b"
-                              : "white",
-                        textAlign: "center",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {store}
-                      <br />₹{price}
-                    </div>
-                  ))}
-                </div>
-
-                <div
-                  style={{
-                    marginTop: 10,
-                    fontWeight: 700,
-                    color: "var(--accent)",
-                  }}
-                >
-                  Best: ₹{best} • {item.cashback}
-                </div>
-              </div>
-            );
-          })}
+    <div className="fadeIn" style={{ display: "grid", gap: 24 }}>
+      {/* Lifestyle Profile Header */}
+      <div className="card" style={{
+        background: `linear-gradient(135deg, ${colors.accent}20, ${colors.success}20)`,
+        border: `1px solid ${colors.border}`,
+        textAlign: 'center',
+      }}>
+        <div style={{
+          fontSize: 48,
+          marginBottom: 16,
+        }}>
+          {personality.icon}
+        </div>
+        <h2 style={{
+          margin: 0,
+          fontSize: 28,
+          fontWeight: 800,
+          color: colors.text,
+          marginBottom: 8,
+        }}>
+          You're a {profile}
+        </h2>
+        <div style={{
+          fontSize: 18,
+          color: personality.color,
+          fontWeight: 600,
+          marginBottom: 16,
+        }}>
+          {personality.type} • {formatRupees(lifestyleData?.totalSpending || 0)} monthly
+        </div>
+        <div style={{
+          fontSize: 14,
+          color: colors.textSecondary,
+          maxWidth: 400,
+          margin: '0 auto',
+        }}>
+          Based on your spending patterns, we've identified your financial personality
         </div>
       </div>
 
-      {/* Local Deals */}
-      <div style={cardStyle(theme)}>
-        <h3 style={{ marginBottom: 12 }}>🏬 Local Deals Nearby</h3>
-        <div style={{ display: "grid", gap: 14 }}>
-          {[
-            ["Whole Foods", "20% off groceries", "0.5 mi"],
-            ["Shell Gas", "10 cents off per gallon", "1.2 mi"],
-            ["Target", "15% off household items", "2.3 mi"],
-          ].map(([store, offer, dist], i) => (
-            <div
-              key={i}
-              style={{
-                padding: 14,
-                borderRadius: 14,
-                background:
-                  theme === "light"
-                    ? "#fafafa"
-                    : "rgba(255,255,255,0.04)",
-                border:
-                  theme === "light"
-                    ? "1px solid rgba(0,0,0,0.05)"
-                    : "1px solid rgba(255,255,255,0.1)",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <div>
-                <strong>{store}</strong>
-                <div style={{ opacity: 0.7 }}>{offer}</div>
-              </div>
-              <div>{dist}</div>
-            </div>
-          ))}
-        </div>
-
-        <input
-          placeholder="Enter your location for more deals"
-          style={{
-            marginTop: 16,
-            padding: 12,
-            borderRadius: 12,
-            border: "none",
-            width: "100%",
-            background:
-              theme === "light" ? "#f3f4f6" : "rgba(255,255,255,0.05)",
-            color: theme === "light" ? "#1e293b" : "white",
-          }}
-        />
-      </div>
-
-      {/* Currency Converter */}
-      <div style={cardStyle(theme)}>
-        <h3 style={{ marginBottom: 12 }}>💱 Currency Converter</h3>
-
-        <div style={{ display: "grid", gap: 12 }}>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+      {/* Tab Navigation */}
+      <div style={{
+        display: "flex",
+        gap: 8,
+        background: colors.glass,
+        padding: 8,
+        borderRadius: 12,
+        border: `1px solid ${colors.border}`,
+      }}>
+        {[
+          { id: 'spending', label: 'Spending Habits', icon: '💳' },
+          { id: 'goals', label: 'Lifestyle Goals', icon: '🎯' },
+          { id: 'tips', label: 'Smart Tips', icon: '💡' },
+          { id: 'trends', label: 'Trends', icon: '📈' }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
             style={{
+              flex: 1,
               padding: 12,
-              borderRadius: 12,
-              border: "none",
-              background:
-                theme === "light" ? "#f3f4f6" : "rgba(255,255,255,0.06)",
-              color: theme === "light" ? "#0f172a" : "white",
-            }}
-          />
-
-          <div
-            style={{
-              padding: 14,
-              borderRadius: 16,
-              background:
-                theme === "light"
-                  ? "#f9fafb"
-                  : "rgba(255,255,255,0.04)",
+              background: activeTab === tab.id ? colors.accent : 'transparent',
+              color: activeTab === tab.id ? 'white' : colors.text,
+              border: 'none',
+              borderRadius: 8,
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontSize: 14,
             }}
           >
-            <strong>{amount} INR</strong> ={" "}
-            <strong>{converted} USD</strong>
-            <br />
-            <span style={{ opacity: 0.7 }}>
-              Rate: 1 INR = {conversionRate.toFixed(4)} USD
-            </span>
+            {tab.icon} {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      {activeTab === 'spending' && (
+        <div style={{ display: "grid", gap: 24 }}>
+          {/* Spending Breakdown */}
+          <div className="card" style={{
+            background: colors.cardBg,
+            border: `1px solid ${colors.border}`,
+          }}>
+            <h3 style={{
+              margin: "0 0 20px 0",
+              fontSize: 18,
+              fontWeight: 700,
+              color: colors.text,
+            }}>
+              💳 Your Spending DNA
+            </h3>
+            
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: 16,
+            }}>
+              {Object.entries(lifestyleData?.insights?.category_breakdown || {}).map(([category, amount]) => {
+                const total = lifestyleData?.totalSpending || 1;
+                const percentage = ((amount / total) * 100).toFixed(1);
+                const icons = {
+                  'Dining': '🍽️', 'Shopping': '🛍️', 'Transportation': '🚗',
+                  'Entertainment': '🎬', 'Groceries': '🛒', 'Utilities': '⚡'
+                };
+                
+                return (
+                  <div key={category} style={{
+                    padding: 16,
+                    background: colors.glass,
+                    borderRadius: 12,
+                    textAlign: 'center',
+                  }}>
+                    <div style={{ fontSize: 32, marginBottom: 8 }}>
+                      {icons[category] || '📋'}
+                    </div>
+                    <div style={{
+                      fontSize: 18,
+                      fontWeight: 700,
+                      color: colors.accent,
+                      marginBottom: 4,
+                    }}>
+                      {formatRupees(amount)}
+                    </div>
+                    <div style={{
+                      fontSize: 14,
+                      color: colors.text,
+                      fontWeight: 600,
+                      marginBottom: 4,
+                    }}>
+                      {category}
+                    </div>
+                    <div style={{
+                      fontSize: 12,
+                      color: colors.textSecondary,
+                    }}>
+                      {percentage}% of spending
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {activeTab === 'goals' && (
+        <div style={{ display: "grid", gap: 24 }}>
+          <div className="card" style={{
+            background: colors.cardBg,
+            border: `1px solid ${colors.border}`,
+          }}>
+            <h3 style={{
+              margin: "0 0 20px 0",
+              fontSize: 18,
+              fontWeight: 700,
+              color: colors.text,
+            }}>
+              🎯 Lifestyle Goals
+            </h3>
+            
+            <div style={{
+              display: "grid",
+              gap: 16,
+            }}>
+              {[
+                { goal: 'Emergency Fund', target: 500000, current: 315000, icon: '🛡️' },
+                { goal: 'Vacation Fund', target: 200000, current: 45000, icon: '✈️' },
+                { goal: 'Gadget Upgrade', target: 150000, current: 89000, icon: '📱' },
+                { goal: 'Health & Fitness', target: 100000, current: 25000, icon: '💪' }
+              ].map((item, index) => {
+                const progress = (item.current / item.target) * 100;
+                
+                return (
+                  <div key={index} style={{
+                    padding: 16,
+                    background: colors.glass,
+                    borderRadius: 12,
+                    border: `1px solid ${colors.border}`,
+                  }}>
+                    <div style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginBottom: 12,
+                    }}>
+                      <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 12,
+                      }}>
+                        <span style={{ fontSize: 24 }}>{item.icon}</span>
+                        <div>
+                          <div style={{
+                            fontWeight: 600,
+                            color: colors.text,
+                          }}>
+                            {item.goal}
+                          </div>
+                          <div style={{
+                            fontSize: 12,
+                            color: colors.textSecondary,
+                          }}>
+                            {formatRupees(item.current)} / {formatRupees(item.target)}
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{
+                        fontSize: 16,
+                        fontWeight: 700,
+                        color: colors.accent,
+                      }}>
+                        {progress.toFixed(0)}%
+                      </div>
+                    </div>
+                    
+                    <div style={{
+                      height: 6,
+                      background: colors.border,
+                      borderRadius: 3,
+                      overflow: "hidden",
+                    }}>
+                      <div style={{
+                        width: `${Math.min(progress, 100)}%`,
+                        height: "100%",
+                        background: `linear-gradient(90deg, ${colors.accent}, ${colors.accentHover})`,
+                        transition: "width 0.3s ease",
+                      }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'tips' && (
+        <div className="card" style={{
+          background: colors.cardBg,
+          border: `1px solid ${colors.border}`,
+        }}>
+          <h3 style={{
+            margin: "0 0 20px 0",
+            fontSize: 18,
+            fontWeight: 700,
+            color: colors.text,
+          }}>
+            💡 Personalized Tips for {profile}
+          </h3>
+          
+          <div style={{
+            display: "grid",
+            gap: 16,
+          }}>
+            {tips.map((tip, index) => (
+              <div key={index} style={{
+                padding: 16,
+                background: colors.glass,
+                borderRadius: 12,
+                border: `1px solid ${colors.border}`,
+                display: "flex",
+                alignItems: "center",
+                gap: 16,
+              }}>
+                <div style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  background: colors.accent + "20",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: colors.accent,
+                }}>
+                  {index + 1}
+                </div>
+                <div style={{
+                  fontSize: 16,
+                  color: colors.text,
+                  lineHeight: 1.5,
+                }}>
+                  {tip}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'trends' && (
+        <div className="card" style={{
+          background: colors.cardBg,
+          border: `1px solid ${colors.border}`,
+        }}>
+          <h3 style={{
+            margin: "0 0 20px 0",
+            fontSize: 18,
+            fontWeight: 700,
+            color: colors.text,
+          }}>
+            📈 Your Spending Trends
+          </h3>
+          
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: 16,
+          }}>
+            {[
+              { metric: 'Monthly Average', value: formatRupees(lifestyleData?.totalSpending || 0), trend: '+5%', positive: false },
+              { metric: 'Savings Rate', value: '23%', trend: '+2%', positive: true },
+              { metric: 'Largest Category', value: profile, trend: 'Stable', positive: true },
+              { metric: 'Risk Score', value: 'Low', trend: 'Improving', positive: true }
+            ].map((item, index) => (
+              <div key={index} style={{
+                padding: 16,
+                background: colors.glass,
+                borderRadius: 12,
+                textAlign: 'center',
+              }}>
+                <div style={{
+                  fontSize: 24,
+                  fontWeight: 800,
+                  color: colors.text,
+                  marginBottom: 8,
+                }}>
+                  {item.value}
+                </div>
+                <div style={{
+                  fontSize: 14,
+                  color: colors.textSecondary,
+                  marginBottom: 8,
+                }}>
+                  {item.metric}
+                </div>
+                <div style={{
+                  fontSize: 12,
+                  color: item.positive ? colors.success : colors.error,
+                  fontWeight: 600,
+                }}>
+                  {item.trend}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

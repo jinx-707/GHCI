@@ -1,20 +1,34 @@
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, #0f172a, #1e3a8a, #3b82f6);
-  background-size: cover;
-  background-repeat: no-repeat;
-  overflow-x: hidden;
-}
-
-#root {
-  min-width: 100vw; /* <-- IMPORTANT */
+/* App-specific styles */
+.app-container {
   min-height: 100vh;
   display: flex;
+  width: 100%;
 }
 
+/* Remove any conflicting background overrides */
 * {
-  background-color: transparent !important;
+  box-sizing: border-box;
+}
+
+/* Ensure proper theme transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
 }
