@@ -9,6 +9,7 @@ import Coach from "./pages/Coach";
 import Settings from "./pages/Settings";
 import Lifestyle from "./pages/Lifestyle";
 import Dashboard from "./pages/Dashboard";
+import AIInsights from "./pages/AIInsights";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/coach" element={<Coach />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/lifestyle" element={<Lifestyle />} />
+            <Route path="/ai-insights" element={<AIInsights />} />
           </Routes>
         </Layout>
       </BrowserRouter>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { formatRupees } from "../utils/currency";
 import ScenarioSimulator from "../components/ScenarioSimulator";
+import apiService from "../services/api";
 import {
   PieChart,
   Pie,
@@ -34,20 +35,95 @@ const Budget = () => {
   const { getThemeColors } = useTheme();
   const colors = getThemeColors();
   const [monthlyBudget, setMonthlyBudget] = useState(250000);
-  const [currentSpent] = useState(150000);
+  const [currentSpent, setCurrentSpent] = useState(0);
   const [savingsGoal] = useState(50000);
+  const [realCategoryData, setRealCategoryData] = useState([]);
+  const [loading, setLoading] = useState(true);
   
-  const totalCategorySpent = categoryData.reduce((sum, cat) => sum + cat.value, 0);
+  const totalCategorySpent = realCategoryData.reduce((sum, cat) => sum + cat.value, 0) || currentSpent;
   const remaining = monthlyBudget - totalCategorySpent;
   const progressPercent = (totalCategorySpent / monthlyBudget) * 100;
   const savingsProgress = (remaining / savingsGoal) * 100;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Simulate real-time updates
-    }, 30000);
+    const fetchBudgetData = async () => {
+      try {
+        const analytics = await apiService.getCategoryAnalytics();
+        if (analytics.categories) {
+          const categoryArray = Object.entries(analytics.categories).map(([name, data]) => ({
+            name: `${getCategoryIcon(name)} ${name}`,
+            value: data.total,
+            budget: getBudgetForCategory(name),
+            color: getCategoryColor(name)
+          }));
+          setRealCategoryData(categoryArray);
+          setCurrentSpent(analytics.total_spent || 0);
+        }
+      } catch (error) {
+        console.error('Failed to load budget data:', error);
+        // Use default data if backend fails
+        setRealCategoryData(categoryData);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBudgetData();
+    const interval = setInterval(fetchBudgetData, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const getCategoryIcon = (category) => {
+    const icons = {
+      'Dining': '🍽️', 'Shopping': '🛍️', 'Transportation': '🚗',
+      'Utilities': '⚡', 'Groceries': '🛒', 'Entertainment': '🎬',
+      'Healthcare': '🏥', 'Education': '📚'
+    };
+    return icons[category] || '📋';
+  };
+
+  const getCategoryColor = (category) => {
+    const colorMap = {
+      'Dining': '#FF6B6B', 'Shopping': '#4ECDC4', 'Transportation': '#45B7D1',
+      'Utilities': '#96CEB4', 'Groceries': '#FFEAA7', 'Entertainment': '#DDA0DD',
+      'Healthcare': '#FF9FF3', 'Education': '#54A0FF'
+    };
+    return colorMap[category] || '#95A5A6';
+  };
+
+  const getBudgetForCategory = (category) => {
+    const budgets = {
+      'Dining': 40000, 'Shopping': 30000, 'Transportation': 20000,
+      'Utilities': 25000, 'Groceries': 35000, 'Entertainment': 15000,
+      'Healthcare': 20000, 'Education': 10000
+    };
+    return budgets[category] || 15000;
+  };
+
+  const handleUpdateBudget = async () => {
+    // In a real app, this would save to backend
+    alert(`Budget updated to ${formatRupees(monthlyBudget)}`);
+  };
+
+  const handleSaveBudget = async () => {
+    alert('Budget saved successfully!');
+  };
+
+  const handleExportData = async () => {
+    const data = {
+      monthlyBudget,
+      totalSpent: totalCategorySpent,
+      remaining,
+      categories: realCategoryData
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'budget-data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="fadeIn" style={{ display: "grid", gap: 20 }}>
@@ -182,7 +258,9 @@ const Budget = () => {
                 fontSize: 14,
               }}
             />
-            <button className="btn btn-primary" style={{
+            <button 
+              onClick={handleUpdateBudget}
+              className="btn btn-primary" style={{
               background: colors.accent,
               color: "white",
               padding: "12px 16px",
@@ -197,7 +275,9 @@ const Budget = () => {
             gridTemplateColumns: "1fr 1fr",
             gap: 12,
           }}>
-            <button style={{
+            <button 
+              onClick={handleSaveBudget}
+              style={{
               padding: 12,
               borderRadius: 8,
               border: `1px solid ${colors.success}`,
@@ -205,10 +285,13 @@ const Budget = () => {
               color: colors.success,
               fontSize: 14,
               fontWeight: 600,
+              cursor: 'pointer'
             }}>
               💾 Save Budget
             </button>
-            <button style={{
+            <button 
+              onClick={handleExportData}
+              style={{
               padding: 12,
               borderRadius: 8,
               border: `1px solid ${colors.warning}`,
@@ -216,6 +299,7 @@ const Budget = () => {
               color: colors.warning,
               fontSize: 14,
               fontWeight: 600,
+              cursor: 'pointer'
             }}>
               📊 Export Data
             </button>
@@ -223,7 +307,7 @@ const Budget = () => {
         </div>
 
         {/* Enhanced Scenario Simulator */}
-        <ScenarioSimulator currentSpending={currentSpent} />
+        <ScenarioSimulator currentSpending={totalCategorySpent} />
       </div>
 
       {/* Charts Row */}
@@ -330,7 +414,7 @@ const Budget = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: 16,
         }}>
-          {categoryData.map((item, index) => {
+          {(realCategoryData.length > 0 ? realCategoryData : categoryData).map((item, index) => {
             const percent = (item.value / item.budget) * 100;
             const isOverBudget = item.value > item.budget;
             

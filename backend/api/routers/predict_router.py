@@ -37,19 +37,12 @@ async def predict_transaction(req: PredictRequest, request: Request):
                 'currency': 'INR'
             }
         else:
-            # Fallback to function call
-            cat, conf = predictor(req.text)
+            # Import enhanced dummy predictor
+            from models.model_dummy_loader import dummy_predict_enhanced
+            result = dummy_predict_enhanced(req.text, req.amount)
             return {
                 'success': True,
-                'prediction': {
-                    'category': cat,
-                    'category_confidence': conf,
-                    'amount': req.amount,
-                    'amount_formatted': f"₹{req.amount:,.0f}" if req.amount else None,
-                    'fraud_probability': 0.0,
-                    'is_fraud': False,
-                    'model_version': 'fallback'
-                },
+                'prediction': result,
                 'currency': 'INR'
             }
             

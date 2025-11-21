@@ -13,6 +13,7 @@ const Layout = ({ children }) => {
     { id: "dashboard", label: "Live Dashboard", icon: "📊", to: "/dashboard" },
     { id: "budget", label: "Budget", icon: "💰", to: "/budget" },
     { id: "insights", label: "Insights", icon: "🔍", to: "/insights" },
+    { id: "ai-insights", label: "AI Insights", icon: "🧠", to: "/ai-insights" },
     { id: "coach", label: "AI Coach", icon: "🤖", to: "/coach" },
     { id: "lifestyle", label: "Lifestyle", icon: "✨", to: "/lifestyle" },
     { id: "settings", label: "Settings", icon: "⚙️", to: "/settings" },

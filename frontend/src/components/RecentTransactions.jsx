@@ -13,25 +13,35 @@ const RecentTransactions = () => {
   useEffect(() => {
     const fetchLiveData = async () => {
       try {
-        const result = await apiService.getTestData();
-        if (result.test_results) {
-          const liveTransactions = result.test_results.map((item, index) => ({
-            id: index + 1,
-            text: item.input?.text || 'Unknown Transaction',
-            amount: item.input?.amount || 0,
-            category: item.prediction?.category || 'Other',
-            confidence: item.prediction?.category_confidence || 0,
-            fraud_risk: item.prediction?.fraud_risk_level || 'LOW',
-            fraud_prob: item.prediction?.fraud_probability || 0,
-            date: new Date().toISOString().split('T')[0]
+        const result = await apiService.getTransactions();
+        if (result.transactions && result.transactions.length > 0) {
+          const liveTransactions = result.transactions.map((item) => ({
+            id: item.id,
+            text: item.description,
+            amount: item.amount,
+            category: item.category,
+            confidence: item.confidence || 0,
+            method: item.method,
+            date: item.date
           }));
           setTransactions(liveTransactions);
           setIsLive(true);
+        } else {
+          // Show sample data when no transactions
+          setTransactions([
+            { id: 1, text: 'No transactions yet', amount: 0, category: 'Upload CSV to see data', date: new Date().toISOString().split('T')[0] }
+          ]);
+          setIsLive(true); // Backend is connected, just no data
         }
       } catch (error) {
         console.error('Live data failed:', error);
+        // Set realistic demo transactions for offline mode
         setTransactions([
-          { id: 1, text: 'Backend Offline', amount: 0, category: 'Error', date: new Date().toISOString().split('T')[0] }
+          { id: 1, text: 'Starbucks Coffee Day', amount: 450, category: 'Dining', confidence: 0.95, date: '2024-01-20' },
+          { id: 2, text: 'Amazon Shopping', amount: 7500, category: 'Shopping', confidence: 0.88, date: '2024-01-19' },
+          { id: 3, text: 'Uber Ride', amount: 280, category: 'Transportation', confidence: 0.92, date: '2024-01-19' },
+          { id: 4, text: 'Big Bazaar Groceries', amount: 3200, category: 'Groceries', confidence: 0.85, date: '2024-01-18' },
+          { id: 5, text: 'Netflix Subscription', amount: 799, category: 'Entertainment', confidence: 0.98, date: '2024-01-18' }
         ]);
         setIsLive(false);
       } finally {
@@ -40,7 +50,7 @@ const RecentTransactions = () => {
     };
 
     fetchLiveData();
-    const interval = setInterval(fetchLiveData, 10000); // Refresh every 10s
+    const interval = setInterval(fetchLiveData, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -86,13 +96,13 @@ const RecentTransactions = () => {
         </h3>
         <div style={{
           padding: "4px 8px",
-          background: isLive ? colors.success + "20" : colors.error + "20",
-          color: isLive ? colors.success : colors.error,
+          background: isLive ? colors.success + "20" : colors.warning + "20",
+          color: isLive ? colors.success : colors.warning,
           borderRadius: 12,
           fontSize: 12,
           fontWeight: 600,
         }}>
-          {isLive ? 'BACKEND CONNECTED' : 'BACKEND OFFLINE'}
+          {isLive ? 'LIVE DATA' : 'DEMO DATA'}
         </div>
       </div>
 

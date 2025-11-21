@@ -87,7 +87,7 @@ class ModelPredictor:
             'model_version': 'enhanced'
         }
         
-        # Enhanced category prediction
+        # Enhanced category prediction with fallback
         if self.vectorizer and self.cat_model:
             try:
                 text_vec = self.vectorizer.transform([text_clean])
@@ -95,8 +95,16 @@ class ModelPredictor:
                 cat_proba = self.cat_model.predict_proba(text_vec)[0]
                 cat_conf = np.max(cat_proba)
                 
-                result['category'] = str(cat_pred)
-                result['category_confidence'] = float(cat_conf)
+                # Use ML prediction if confidence is high enough, otherwise fallback
+                if cat_conf > 0.6 and str(cat_pred) != 'Other':
+                    result['category'] = str(cat_pred)
+                    result['category_confidence'] = float(cat_conf)
+                else:
+                    # Use rule-based fallback for low confidence or "Other" predictions
+                    fallback_cat = self._predict_category_fallback(text_clean)
+                    result['category'] = fallback_cat
+                    # Higher confidence for suspicious transactions
+                    result['category_confidence'] = 0.95 if fallback_cat == 'Suspicious' else 0.85
                 
                 # Get top 3 categories
                 top_indices = np.argsort(cat_proba)[-3:][::-1]
@@ -110,49 +118,121 @@ class ModelPredictor:
                 
             except Exception as e:
                 print(f"Category prediction error: {e}")
+                # Rule-based fallback
+                result['category'] = self._predict_category_fallback(text_clean)
+                result['category_confidence'] = 0.75
+        else:
+            # Rule-based prediction when no ML model
+            result['category'] = self._predict_category_fallback(text_clean)
+            result['category_confidence'] = 0.75
         
-        # Enhanced fraud prediction
-        if self.fraud_pipeline and amount is not None:
+        # Enhanced fraud prediction with fallback
+        if amount is not None:
             try:
-                # Create enhanced features
-                test_df = pd.DataFrame({
-                    'text_clean': [text_clean],
-                    'amount': [amount],
-                    'amount_log': [np.log1p(amount)],
-                    'text_length': [len(text_clean)],
-                    'word_count': [len(text_clean.split())]
-                })
-                
-                fraud_pred = self.fraud_pipeline.predict(test_df)[0]
-                fraud_proba = self.fraud_pipeline.predict_proba(test_df)[0]
-                fraud_conf = fraud_proba[1] if len(fraud_proba) > 1 else fraud_proba[0]
-                
-                result['fraud_probability'] = float(fraud_conf)
-                result['is_fraud'] = bool(fraud_pred)
+                if self.fraud_pipeline:
+                    # Create enhanced features for ML model
+                    test_df = pd.DataFrame({
+                        'text_clean': [text_clean],
+                        'amount': [amount],
+                        'amount_log': [np.log1p(amount)],
+                        'text_length': [len(text_clean)],
+                        'word_count': [len(text_clean.split())]
+                    })
+                    
+                    fraud_pred = self.fraud_pipeline.predict(test_df)[0]
+                    fraud_proba = self.fraud_pipeline.predict_proba(test_df)[0]
+                    fraud_conf = fraud_proba[1] if len(fraud_proba) > 1 else fraud_proba[0]
+                    
+                    result['fraud_probability'] = float(fraud_conf)
+                    result['is_fraud'] = bool(fraud_pred)
+                else:
+                    # Rule-based fraud detection fallback
+                    fraud_score = 0.0
+                    
+                    # High amount risk (more realistic thresholds)
+                    if amount > 200000:
+                        fraud_score += 0.6
+                    elif amount > 100000:
+                        fraud_score += 0.4
+                    elif amount > 50000:
+                        fraud_score += 0.2
+                    elif amount > 25000:
+                        fraud_score += 0.1
+                    
+                    # Suspicious keywords - much more aggressive
+                    suspicious_words = ['unknown', 'suspicious', 'fake', 'fraud', 'scam', 'unauthorized', 'refund', 'chargeback', 'upi', 'transfer']
+                    suspicious_count = sum(1 for word in suspicious_words if word in text_clean)
+                    if suspicious_count >= 2:  # Multiple suspicious words
+                        fraud_score += 0.8
+                    elif suspicious_count == 1:
+                        fraud_score += 0.5
+                    
+                    # Unusual patterns
+                    if len(text_clean.split()) < 3:
+                        fraud_score += 0.2
+                    
+                    # Generic payment terms
+                    generic_terms = ['payment', 'transfer', 'transaction', 'charge']
+                    if any(term in text_clean for term in generic_terms) and len(text_clean.split()) < 4:
+                        fraud_score += 0.3
+                    
+                    # Time-based (if available)
+                    import datetime
+                    current_hour = datetime.datetime.now().hour
+                    if current_hour < 6 or current_hour > 23:  # Late night transactions
+                        fraud_score += 0.1
+                    
+                    result['fraud_probability'] = min(fraud_score, 1.0)
+                    result['is_fraud'] = fraud_score > 0.4
                 
                 # Enhanced risk levels
-                if fraud_conf > 0.8:
+                fraud_conf = result['fraud_probability']
+                if fraud_conf > 0.7:
                     result['fraud_risk_level'] = 'CRITICAL'
-                elif fraud_conf > 0.6:
+                elif fraud_conf > 0.5:
                     result['fraud_risk_level'] = 'HIGH'
-                elif fraud_conf > 0.4:
+                elif fraud_conf > 0.3:
                     result['fraud_risk_level'] = 'MEDIUM'
                 else:
                     result['fraud_risk_level'] = 'LOW'
                 
                 # Risk factors
                 risk_factors = []
-                if amount > 50000:
+                if amount > 100000:
+                    risk_factors.append('Very high amount')
+                elif amount > 50000:
                     risk_factors.append('High amount')
-                if 'unknown' in text_clean or 'suspicious' in text_clean:
+                elif amount > 25000:
+                    risk_factors.append('Moderate amount')
+                
+                suspicious_words = ['unknown', 'suspicious', 'fake', 'fraud', 'scam', 'unauthorized']
+                if any(word in text_clean for word in suspicious_words):
                     risk_factors.append('Suspicious keywords')
+                
+                if 'upi' in text_clean and any(word in text_clean for word in ['unknown', 'suspicious']):
+                    risk_factors.append('Suspicious UPI transaction')
+                
                 if len(text_clean.split()) < 3:
                     risk_factors.append('Vague description')
+                
+                generic_terms = ['payment', 'transfer', 'transaction']
+                if any(term in text_clean for term in generic_terms) and len(text_clean.split()) < 4:
+                    risk_factors.append('Generic payment description')
+                
+                if result['fraud_probability'] > 0.4:
+                    risk_factors.append('High risk pattern')
+                elif result['fraud_probability'] > 0.2:
+                    risk_factors.append('Medium risk pattern')
                 
                 result['risk_factors'] = risk_factors
                 
             except Exception as e:
                 print(f"Fraud prediction error: {e}")
+                # Minimal fallback
+                result['fraud_probability'] = 0.1
+                result['is_fraud'] = False
+                result['fraud_risk_level'] = 'LOW'
+                result['risk_factors'] = []
         
         return result
 
@@ -174,6 +254,48 @@ class ModelPredictor:
             results.append(result)
         
         return results
+
+    def _predict_category_fallback(self, text_clean: str) -> str:
+        """Rule-based category prediction fallback"""
+        text_lower = text_clean.lower()
+        
+        # Suspicious/Fraud keywords - highest priority
+        if any(word in text_lower for word in ['suspicious', 'unknown', 'fake', 'fraud', 'scam', 'unauthorized']):
+            return 'Suspicious'
+        
+        # Dining keywords
+        if any(word in text_lower for word in ['coffee', 'starbucks', 'restaurant', 'food', 'cafe', 'pizza', 'burger', 'kfc', 'mcdonalds', 'dominos']):
+            return 'Dining'
+        
+        # Shopping keywords  
+        if any(word in text_lower for word in ['amazon', 'flipkart', 'shopping', 'mall', 'store', 'purchase', 'buy']):
+            return 'Shopping'
+        
+        # Transportation keywords
+        if any(word in text_lower for word in ['uber', 'ola', 'taxi', 'petrol', 'fuel', 'gas', 'transport', 'bus', 'train']):
+            return 'Transportation'
+        
+        # Entertainment keywords
+        if any(word in text_lower for word in ['netflix', 'hotstar', 'movie', 'cinema', 'subscription', 'spotify', 'youtube']):
+            return 'Entertainment'
+        
+        # Groceries keywords
+        if any(word in text_lower for word in ['grocery', 'bazaar', 'mart', 'supermarket', 'vegetables', 'fruits']):
+            return 'Groceries'
+        
+        # Banking keywords
+        if any(word in text_lower for word in ['bank', 'emi', 'loan', 'credit', 'debit', 'atm']):
+            return 'Banking'
+        
+        # Utilities keywords
+        if any(word in text_lower for word in ['electricity', 'water', 'gas', 'internet', 'phone', 'mobile']):
+            return 'Utilities'
+        
+        # Generic UPI/Payment terms
+        if any(word in text_lower for word in ['upi', 'payment', 'transfer']) and len(text_lower.split()) < 4:
+            return 'Transfer'
+        
+        return 'Other'
 
     def get_spending_insights(self, transactions: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Generate spending insights from transactions"""

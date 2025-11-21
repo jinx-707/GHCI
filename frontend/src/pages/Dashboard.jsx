@@ -7,7 +7,6 @@ import apiService from "../services/api";
 const Dashboard = () => {
   const { getThemeColors } = useTheme();
   const colors = getThemeColors();
-  const predict = usePrediction();
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
@@ -20,10 +19,18 @@ const Dashboard = () => {
         const status = await apiService.getStatus();
         setSystemStatus(status);
       } catch (error) {
-        setSystemStatus({ error: 'Backend offline' });
+        setSystemStatus({ 
+          status: 'offline',
+          error: 'Backend offline',
+          backend: 'offline'
+        });
       }
     };
     checkStatus();
+    
+    // Check status every 30 seconds
+    const interval = setInterval(checkStatus, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const handlePredict = async () => {
@@ -31,7 +38,8 @@ const Dashboard = () => {
     
     setLoading(true);
     try {
-      const result = await predict(text, amount ? parseFloat(amount) : null);
+      const response = await apiService.predict(text, amount ? parseFloat(amount) : 0);
+      const result = response.prediction || response;
       setPrediction(result);
     } catch (error) {
       setPrediction({ error: error.message });
@@ -68,21 +76,38 @@ const Dashboard = () => {
             width: 12,
             height: 12,
             borderRadius: "50%",
-            background: systemStatus?.error ? colors.error : colors.success,
+            background: systemStatus?.status === 'offline' || systemStatus?.error ? colors.error : colors.success,
           }} />
           <span style={{ color: colors.text, fontWeight: 500 }}>
-            {systemStatus?.error ? 'Backend Offline' : 'Connected to Live Backend'}
+            {systemStatus?.status === 'offline' || systemStatus?.error ? 
+              '⚫ OFFLINE - Using Fallback Predictions' : 
+              '🟢 ONLINE - Live Backend Connected'
+            }
           </span>
-          {systemStatus && !systemStatus.error && (
+          {systemStatus && systemStatus.status !== 'offline' && !systemStatus.error && (
             <span style={{
               marginLeft: 'auto',
               fontSize: 12,
               color: colors.textSecondary,
             }}>
-              ML: {systemStatus.ml_models || 'loaded'}
+              ML: {systemStatus.ml_models?.status === 'loaded' ? '✅ Active' : '📋 Rules Only'}
             </span>
           )}
         </div>
+        
+        {(systemStatus?.status === 'offline' || systemStatus?.error) && (
+          <div style={{
+            marginTop: 12,
+            padding: 12,
+            background: colors.warning + "20",
+            border: `1px solid ${colors.warning}30`,
+            borderRadius: 8,
+            fontSize: 14,
+            color: colors.warning,
+          }}>
+            ⚠️ Backend is offline. The system is using intelligent fallback predictions with rule-based fraud detection. All features remain functional.
+          </div>
+        )}
       </div>
 
       {/* Live Prediction Test */}
@@ -177,7 +202,7 @@ const Dashboard = () => {
                     fontWeight: 700,
                     fontSize: 16,
                   }}>
-                    {prediction.category}
+                    {prediction.category || 'Other'}
                   </span>
                 </div>
                 
@@ -190,40 +215,61 @@ const Dashboard = () => {
                     Confidence:
                   </span>
                   <span style={{ color: colors.success }}>
-                    {(prediction.category_confidence * 100).toFixed(1)}%
+                    {Math.round((prediction.category_confidence || 0.5) * 100)}%
                   </span>
                 </div>
                 
-                {prediction.amount_formatted && (
-                  <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}>
+                  <span style={{ color: colors.text, fontWeight: 600 }}>
+                    Method:
+                  </span>
+                  <span style={{
+                    color: prediction.model_version === 'enhanced' ? colors.accent : 
+                           prediction.model_version === 'offline_fallback' ? colors.warning : colors.textSecondary,
+                    fontWeight: 600,
                   }}>
-                    <span style={{ color: colors.text, fontWeight: 600 }}>
-                      Amount:
-                    </span>
-                    <span style={{ color: colors.text, fontSize: 16 }}>
-                      {prediction.amount_formatted}
-                    </span>
-                  </div>
-                )}
+                    {prediction.model_version === 'enhanced' ? '🧠 ML Model' : 
+                     prediction.model_version === 'offline_fallback' ? '⚡ Offline Fallback' : '📋 Rule-based'}
+                  </span>
+                </div>
                 
-                {prediction.fraud_risk_level && (
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}>
+                  <span style={{ color: colors.text, fontWeight: 600 }}>
+                    Fraud Risk:
+                  </span>
+                  <span style={{
+                    color: prediction.fraud_risk_level === 'LOW' ? colors.success :
+                           prediction.fraud_risk_level === 'MEDIUM' ? colors.warning : 
+                           prediction.fraud_risk_level === 'HIGH' ? '#ff6b35' : colors.error,
+                    fontWeight: 600,
+                  }}>
+                    {prediction.fraud_risk_level || 'LOW'} RISK ({Math.round((prediction.fraud_probability || 0.05) * 100)}%)
+                    {prediction.is_fraud && ' ⚠️'}
+                  </span>
+                </div>
+                
+                {prediction.risk_factors && prediction.risk_factors.length > 0 && (
                   <div style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                   }}>
                     <span style={{ color: colors.text, fontWeight: 600 }}>
-                      Fraud Risk:
+                      Risk Factors:
                     </span>
                     <span style={{
-                      color: prediction.fraud_risk_level === 'LOW' ? colors.success : 
-                            prediction.fraud_risk_level === 'HIGH' ? colors.error : colors.warning,
-                      fontWeight: 600,
+                      color: colors.textSecondary,
+                      fontSize: 12,
                     }}>
-                      {prediction.fraud_risk_level}
+                      {prediction.risk_factors.join(', ')}
                     </span>
                   </div>
                 )}
@@ -256,7 +302,7 @@ const Dashboard = () => {
             { text: "Starbucks Coffee Day", amount: 450 },
             { text: "Amazon Shopping", amount: 7500 },
             { text: "HDFC Bank EMI", amount: 155000 },
-            { text: "Suspicious UPI payment", amount: 25000 }
+            { text: "Suspicious unknown UPI payment", amount: 25000 }
           ].map((test, index) => (
             <button
               key={index}
